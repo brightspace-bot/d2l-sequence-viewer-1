@@ -41,6 +41,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 				:host {
 					--viewer-max-width: 1170px;
 					--sidebar-position: calc(50% - var(--viewer-max-width) / 2);
+
 					display: block;
 					color: var(--d2l-color-ferrite);
 					@apply --d2l-body-standard-text;
@@ -91,7 +92,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 					max-width: var(--viewer-max-width);
 					margin: auto;
 					-webkit-transition: all 0.4s ease-in-out;
-					-webkit-overflow-scrolling: touch;
 					-moz-transition: all 0.4s ease-in-out;
 					-o-transition: all 0.4s ease-in-out;
 					transition: all 0.4s ease-in-out;
