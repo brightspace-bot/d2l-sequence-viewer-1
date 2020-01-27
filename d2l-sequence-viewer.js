@@ -47,13 +47,11 @@ class D2LSequenceViewer extends mixinBehaviors([
 					@apply --d2l-body-standard-text;
 					position: relative;
 					width: 100%;
-					height: 100%;
-				}
-				.back-icon {
-					padding-bottom: 0.2rem;
-					height: 60px;
-					font-size: 0px;
-					display: inline-block;
+					display: flex;
+					flex-direction: column;
+					min-width: 100vw;
+					overflow: hidden;
+					height: var(--dynamic-viewframe-height);
 				}
 				.topbar {
 					position: fixed;
@@ -89,25 +87,27 @@ class D2LSequenceViewer extends mixinBehaviors([
 				#sidebar.offscreen {
 					margin-left: -475px;
 				}
-				.viewer {
-					position: relative;
-					display: inline-block;
-					width: 100%;
-					height: calc(100% - 15px);
-					padding-top: 5px;
-					top: 56px;
-					bottom: 0px;
-					overflow-y: auto;
-				}
 				.viewframe {
 					padding: 24px 30px 0 30px;
-					height: calc(100vh - 40px - 8px - 4px - 24px);
 					max-width: var(--viewer-max-width);
 					margin: auto;
 					-webkit-transition: all 0.4s ease-in-out;
 					-moz-transition: all 0.4s ease-in-out;
 					-o-transition: all 0.4s ease-in-out;
 					transition: all 0.4s ease-in-out;
+					width: 100%;
+					flex: 1 1 0px;
+					margin-top: 56px;
+					box-sizing: border-box;
+				}
+				.viewer {
+					position: relative;
+					display: inline-block;
+					width: 100%;
+					height: calc(100% - 15px);
+					padding-top: 5px;
+					bottom: 0px;
+					overflow-y: auto;
 				}
 				.viewframe:focus {
 					outline: none;
@@ -141,7 +141,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 					}
 					.viewframe {
 						padding: 18px 24px 0 24px;
-						height: calc(100vh - 40px - 8px - 4px - 18px);
 					}
 				}
 				@media(max-width: 767px) {
@@ -295,8 +294,13 @@ class D2LSequenceViewer extends mixinBehaviors([
 			this.dataAsvCssVars && JSON.parse(this.dataAsvCssVars) ||
 			JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars'));
 		const navBarStyles = JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-css-vars'));
-		this.updateStyles({...styles, ...navBarStyles});
-		this._resizeNavListener = this._resizeSideBar.bind(this);
+
+		const customStyles = {
+			'--dynamic-viewframe-height': `${window.innerHeight}px`
+		};
+
+		this.updateStyles({...styles, ...navBarStyles, ...customStyles});
+		this._resizeListener = this._resizeElements.bind(this);
 		this._blurListener = this._closeSlidebarOnFocusContent.bind(this);
 		this._onPopStateListener = this._onPopState.bind(this);
 	}
@@ -307,13 +311,13 @@ class D2LSequenceViewer extends mixinBehaviors([
 		// can do this is a content iframe.
 		window.addEventListener('blur', this._blurListener);
 		window.addEventListener('popstate', this._onPopStateListener);
-		window.addEventListener('resize', this._resizeNavListener);
+		window.addEventListener('resize', this._resizeListener);
 	}
 	disconnectedCallback() {
 		super.disconnectedCallback();
 		window.removeEventListener('blur', this._blurListener);
 		window.removeEventListener('popstate', this._onPopStateListener);
-		window.removeEventListener('resize', this._resizeNavListener);
+		window.removeEventListener('resize', this._resizeListener);
 	}
 
 	async _onEntityChanged(entity) {
@@ -533,12 +537,16 @@ class D2LSequenceViewer extends mixinBehaviors([
 		this.telemetryClient.logTelemetryEvent('sidebar-close');
 	}
 
-	_resizeSideBar() {
+	_resizeElements() {
 		if (this.$.sidebar.classList.contains('offscreen')) {
 			this._sideBarClose();
 		} else {
 			this._sideBarOpen();
 		}
+
+		this.updateStyles({
+			'--dynamic-viewframe-height': `${window.innerHeight}px`
+		});
 	}
 
 	_onEndOfLessonClick() {
