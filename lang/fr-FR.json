@@ -1,10 +1,10 @@
 {
    "activity" : "Activité",
-   "backToContent" : "Retour au contenu",
+   "backToContent" : "Retour à Contenu",
    "close" : "Fermer",
-   "contentLinkText" : "Cliquer pour voir le nouveau contenu.",
-   "endOfSequence" : "Fin de l’unité",
+   "contentLinkText" : "Cliquer pour voir le nouveau contenu",
+   "endOfSequence" : "Fin de l'unité",
    "goBack" : "Retour",
    "newContentAvailable" : "Le nouveau contenu est maintenant disponible!",
-   "toggleNavMenu" : "Activer/Désactiver la barre de navigation latérale coulissante"
+   "toggleNavMenu" : "Faire paraître la barre latérale de navigation"
 }

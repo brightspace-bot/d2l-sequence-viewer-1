@@ -58,33 +58,33 @@
 	},
 	"es-ES": {
 		"activity": "Actividad",
-		"backToContent": "Back to Content",
+		"backToContent": "Regresar a Contenido",
 		"close": "Cerrar",
-		"contentLinkText": "Haga clic para visitar el nuevo contenido.",
+		"contentLinkText": "Haga clic para visitar el nuevo contenido",
 		"endOfSequence": "Término de la unidad",
 		"goBack": "Regresar",
 		"newContentAvailable": "¡El nuevo contenido ya está disponible!",
-		"toggleNavMenu": "Toggle navigational slide out sidebar"
+		"toggleNavMenu": "Alternar barra de navegación deslizable"
 	},
 	"es": {
 		"activity": "Actividad",
-		"backToContent": "Back to Content",
+		"backToContent": "Regresar a Contenido",
 		"close": "Cerrar",
-		"contentLinkText": "Haga clic para visitar el nuevo contenido.",
+		"contentLinkText": "Haga clic para visitar el nuevo contenido",
 		"endOfSequence": "Término de la unidad",
 		"goBack": "Regresar",
 		"newContentAvailable": "¡El nuevo contenido ya está disponible!",
-		"toggleNavMenu": "Toggle navigational slide out sidebar"
+		"toggleNavMenu": "Alternar barra de navegación deslizable"
 	},
 	"fr-FR": {
 		"activity": "Activité",
-		"backToContent": "Retour au contenu",
+		"backToContent": "Retour à Contenu",
 		"close": "Fermer",
-		"contentLinkText": "Cliquer pour voir le nouveau contenu.",
-		"endOfSequence": "Fin de l’unité",
+		"contentLinkText": "Cliquer pour voir le nouveau contenu",
+		"endOfSequence": "Fin de l'unité",
 		"goBack": "Retour",
 		"newContentAvailable": "Le nouveau contenu est maintenant disponible!",
-		"toggleNavMenu": "Activer/Désactiver la barre de navigation latérale coulissante"
+		"toggleNavMenu": "Faire paraître la barre latérale de navigation"
 	},
 	"fr": {
 		"activity": "Activité",
@@ -159,9 +159,9 @@
 	},
 	"pt-PT": {
 		"activity": "Atividade",
-		"backToContent": "Voltar ao conteúdo",
+		"backToContent": "Voltar ao Conteúdo",
 		"close": "Fechar",
-		"contentLinkText": "Clique para visitar o novo conteúdo",
+		"contentLinkText": "Clique aqui para acessar o novo conteúdo",
 		"endOfSequence": "Fim da unidade",
 		"goBack": "Voltar",
 		"newContentAvailable": "Há um novo conteúdo disponível!",
@@ -169,9 +169,9 @@
 	},
 	"pt": {
 		"activity": "Atividade",
-		"backToContent": "Voltar ao conteúdo",
+		"backToContent": "Voltar ao Conteúdo",
 		"close": "Fechar",
-		"contentLinkText": "Clique para visitar o novo conteúdo",
+		"contentLinkText": "Clique aqui para acessar o novo conteúdo",
 		"endOfSequence": "Fim da unidade",
 		"goBack": "Voltar",
 		"newContentAvailable": "Há um novo conteúdo disponível!",
