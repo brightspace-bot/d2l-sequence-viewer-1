@@ -22,8 +22,11 @@
 	"da-DK": {
 		"activity": "Aktivitet",
 		"backToContent": "Tilbage til indhold",
+		"close": "Luk",
+		"contentLinkText": "Klik for at gå til nyt indhold",
 		"endOfSequence": "Afslutning på enhed",
 		"goBack": "Gå tilbage",
+		"newContentAvailable": "Nyt indhold er nu tilgængeligt!",
 		"toggleNavMenu": "Slå sidepanelet for navigation, som du finder i den ene side af skærmen, til og fra"
 	},
 	"de-DE": {
