@@ -2,6 +2,7 @@ import 'd2l-typography/d2l-typography.js';
 import 'd2l-colors/d2l-colors.js';
 import './components/sequence-viewer-header.js';
 import './components/d2l-sequence-viewer-new-content-alert.js';
+import './components/d2l-sequence-viewer-sidebar.js';
 import './localize-behavior.js';
 import '@polymer/polymer/polymer-legacy.js';
 import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
@@ -240,28 +241,15 @@ class D2LSequenceViewer extends mixinBehaviors([
 			</div>
 		</d2l-sequence-viewer-header>
 		<div id="view-container">
+
 			<div id="sidebar-container" class="offscreen">
-				<div id="sidebar">
-					<d2l-sequence-navigator
-						href="{{href}}"
-						token="[[token]]"
-						role="navigation"
-						data-asv-css-vars="[[dataAsvCssVars]]"
-						>
-						<span slot="lesson-header">
-							<d2l-lesson-header id="sidebarHeader"
-											href="[[_rootHref]]"
-											current-activity="{{href}}"
-											module-properties="[[_moduleProperties]]"
-											token="[[token]]">
-							</d2l-lesson-header>
-						</span>
-						<span slot="end-of-lesson" on-click="_onEndOfLessonClick">
-							<d2l-sequence-end href="[[_sequenceEndHref]]" token="[[token]]" current-activity="{{href}}" text="[[localize('endOfSequence')]]"></d2l-sequence-end>
-						</span>
-					</d2l-sequence-navigator>
-				</div>
+				<d2l-sequence-viewer-sidebar
+					href="{{href}}"
+					token="[[token]]"
+				>
+				</d2l-sequence-viewer-sidebar>
 			</div>
+
 			<div id="viewframe" on-click="_closeSlidebarOnFocusContent" role="main" tabindex="0">
 				<d2l-sequences-content-router
 					id="viewer"
