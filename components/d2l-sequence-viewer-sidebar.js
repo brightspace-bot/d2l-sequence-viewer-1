@@ -6,7 +6,7 @@ import 'd2l-icons/tier2-icons.js';
 import 'd2l-icons/tier3-icons.js';
 import 'd2l-typography/d2l-typography.js';
 import 'd2l-sequences/components/d2l-sequences-iterator.js';
-import 'd2l-sequences/d2l-sequence-navigator/d2l-sequence-navigator.js';
+import 'd2l-sequences/d2l-sequence-launcher-unit/d2l-sequence-launcher-unit.js';
 import 'd2l-sequences/d2l-sequence-navigator/d2l-lesson-header.js';
 import 'd2l-sequences/d2l-sequence-navigator/d2l-sequence-end.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
@@ -34,7 +34,7 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 			}
 		</style>
 		<div id="sidebar">
-			<d2l-sequence-navigator
+			<d2l-sequence-launcher-unit
 				href="{{href}}"
 				token="[[token]]"
 				role="navigation"
@@ -59,7 +59,7 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 					>
 					</d2l-sequence-end>
 				</span>
-			</d2l-sequence-navigator>
+			</d2l-sequence-launcher-unit>
 		</div>
 		`;
 	}
