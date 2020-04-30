@@ -246,6 +246,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 				<d2l-sequence-viewer-sidebar
 					href="{{href}}"
 					token="[[token]]"
+					telemetry-client="[[telemetryClient]]"
 				>
 				</d2l-sequence-viewer-sidebar>
 			</div>
@@ -596,10 +597,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 		this.updateStyles({
 			'--dynamic-viewframe-height': `${window.innerHeight}px`
 		});
-	}
-
-	_onEndOfLessonClick() {
-		this.telemetryClient.logTelemetryEvent('end-of-lesson-press');
 	}
 }
 customElements.define(D2LSequenceViewer.is, D2LSequenceViewer);
