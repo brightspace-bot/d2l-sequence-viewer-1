@@ -32,33 +32,38 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 			:host {
 
 			}
+			.m-module-heading {
+				border-top-left-radius: 6px;
+				border-top-right-radius: 6px;
+				display: flex;
+				justify-content: space-between;
+				background-color: var(--d2l-asv-primary-color);
+				color: white;
+				padding: 13px 24px;
+				font-size: 16px;
+			}
 		</style>
 		<div id="sidebar">
+			<div class="m-module-heading">
+				<d2l-sequences-module-name
+					href="[[href]]"
+					token="[[token]]"
+					class="m-module-heading-title"
+				>
+				</d2l-sequences-module-name>
+				<d2l-module-completion-count
+					href="[[href]]"
+					token="[[token]]"
+					class="m-module-heading-completion"
+				>
+				</d2l-module-completion-count>
+			</div>
 			<d2l-sequence-launcher-unit
 				href="{{href}}"
 				token="[[token]]"
 				role="navigation"
 				data-asv-css-vars="[[dataAsvCssVars]]"
 			>
-				<span slot="lesson-header">
-					<d2l-lesson-header
-						id="sidebarHeader"
-						href="[[_rootHref]]"
-						current-activity="{{href}}"
-						module-properties="[[_moduleProperties]]"
-						token="[[token]]"
-					>
-					</d2l-lesson-header>
-				</span>
-				<span slot="end-of-lesson" on-click="_onEndOfLessonClick">
-					<d2l-sequence-end
-						href="[[_sequenceEndHref]]"
-						token="[[token]]"
-						current-activity="{{href}}"
-						text="[[localize('endOfSequence')]]"
-					>
-					</d2l-sequence-end>
-				</span>
 			</d2l-sequence-launcher-unit>
 		</div>
 		`;
@@ -69,12 +74,14 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 	}
 	static get properties() {
 		return {
+			// TODO: add data-as-css-vars
 			telemetryClient: {
 				type: typeof TelemetryHelper,
 				value: function() {
 					return new TelemetryHelper();
 				}
 			},
+			// TODO: need the other properties, if needed
 		};
 	}
 
