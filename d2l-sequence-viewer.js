@@ -57,7 +57,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 					width: 100%;
 					height: 30px;
 					z-index: 3;
-					box-shadow: 2px 0px 3px 2px rgba(214,220,229,0.5); /* 50% D6DCE5 */
+					box-shadow: 2px 0 3px 2px rgba(214,220,229,0.5); /* 50% D6DCE5 */
 					flex-flow: row;
 				}
 				#view-container {
@@ -70,8 +70,12 @@ class D2LSequenceViewer extends mixinBehaviors([
 					margin: 56px auto auto;
 				}
 				#sidebar-container {
+					/* TODO: dont use this weird calc */
+					height: calc(100% - 30px - 15px);
+
 					z-index: 1;
 					flex: 1;
+					/*TODO: 462px;*/
 					max-width: 390px;
 					position: relative;
 					overflow: hidden;

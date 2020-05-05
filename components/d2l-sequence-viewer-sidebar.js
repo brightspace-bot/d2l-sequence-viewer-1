@@ -32,12 +32,24 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 			:host {
 
 			}
+			#sidebar {
+				height: 100%;
+				/*display: flex;*/
+				/*flex-direction: column;*/
+			}
+			#content {
+				/*display: flex;*/
+				/*flex: 1;*/
+
+				height: calc(100% - 58px);
+				overflow-y: auto;
+			}
 			.m-module-heading {
 				border-top-left-radius: 6px;
 				border-top-right-radius: 6px;
 				display: flex;
 				justify-content: space-between;
-				background-color: var(--d2l-asv-primary-color);
+				background-color: var(--d2l-color-celestine);
 				color: white;
 				padding: 13px 24px;
 				font-size: 16px;
@@ -58,13 +70,66 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				>
 				</d2l-module-completion-count>
 			</div>
-			<d2l-sequence-launcher-unit
-				href="{{href}}"
-				token="[[token]]"
-				role="navigation"
-				data-asv-css-vars="[[dataAsvCssVars]]"
-			>
-			</d2l-sequence-launcher-unit>
+<!--			<d2l-sequence-launcher-unit-->
+<!--				href="{{href}}"-->
+<!--				token="[[token]]"-->
+<!--				role="navigation"-->
+<!--				data-asv-css-vars="[[dataAsvCssVars]]"-->
+<!--				class="sidebar-unit"-->
+<!--			>-->
+<!--			</d2l-sequence-launcher-unit>-->
+			<div id="content">
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>helloooo</div>
+				<div>9helloooo</div>
+				<div>8helloooo</div>
+				<div>7helloooo</div>
+				<div>6helloooo</div>
+				<div>5helloooo</div>
+				<div>4helloooo</div>
+				<div>3helloooo</div>
+				<div>2helloooo</div>
+				<div>1helloooo</div>
+				<div>END</div>
+			</div>
 		</div>
 		`;
 	}
