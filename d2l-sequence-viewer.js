@@ -49,7 +49,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 					height: var(--dynamic-viewframe-height);
 				}
 				.topbar {
-					/*position: fixed;*/
 					top: 4px;
 					width: 100%;
 					height: 30px;
@@ -64,18 +63,16 @@ class D2LSequenceViewer extends mixinBehaviors([
 					overflow: hidden;
 					max-width: var(--viewer-max-width);
 					width: 100%;
-					margin: 30px auto 30px auto;
+					margin: 30px auto 0 auto;
 				}
 				#sidebar-container {
 					height: 100%;
 					z-index: 1;
 					flex: 1;
-					/*TODO: 462px;*/
 					max-width: 462px;
 					position: relative;
 					overflow: hidden;
 					background: white;
-					/*padding-top: 30px;*/
 					-webkit-transition: max-width 0.4s ease-in-out;
 					-moz-transition: max-width 0.4s ease-in-out;
 					-o-transition: max-width 0.4s ease-in-out;
@@ -101,15 +98,14 @@ class D2LSequenceViewer extends mixinBehaviors([
 					transition: all 0.4s ease-in-out;
 					flex: 2;
 					box-sizing: border-box;
-					/*overflow: auto;*/
+					padding: 0 30px 30px 30px;
 				}
 				.viewer {
 					position: relative;
 					display: inline-block;
 					width: 100%;
-					/*height: calc(100% - 15px);*/
 					height: 100%;
-					bottom: 0;
+					/*bottom: 0;*/
 					overflow-y: auto;
 				}
 				#viewframe:focus {

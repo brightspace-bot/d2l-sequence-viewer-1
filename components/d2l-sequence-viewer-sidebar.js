@@ -13,7 +13,6 @@ import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 import '../localize-behavior.js';
-import TelemetryHelper from '../helpers/telemetry-helper';
 
 /**
  * @polymer
@@ -36,12 +35,15 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				height: 100%;
 				display: flex;
 				flex-direction: column;
-				background: rosybrown;
 			}
 			#content {
 				display: flex;
 				flex: 1;
 				overflow-y: auto;
+				overflow-x: hidden;
+				border: 1px solid var(--d2l-color-mica);
+				border-top: none;
+				border-bottom: none;
 			}
 			.m-module-heading {
 				border-top-left-radius: 6px;
