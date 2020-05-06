@@ -34,14 +34,13 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 			}
 			#sidebar {
 				height: 100%;
-				/*display: flex;*/
-				/*flex-direction: column;*/
+				display: flex;
+				flex-direction: column;
+				background: rosybrown;
 			}
 			#content {
-				/*display: flex;*/
-				/*flex: 1;*/
-
-				height: calc(100% - 58px);
+				display: flex;
+				flex: 1;
 				overflow-y: auto;
 			}
 			.m-module-heading {
@@ -53,6 +52,9 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				color: white;
 				padding: 13px 24px;
 				font-size: 16px;
+			}
+			.m-module-heading-completion {
+				font-weight: normal;
 			}
 		</style>
 		<div id="sidebar">
@@ -70,65 +72,16 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				>
 				</d2l-module-completion-count>
 			</div>
-<!--			<d2l-sequence-launcher-unit-->
-<!--				href="{{href}}"-->
-<!--				token="[[token]]"-->
-<!--				role="navigation"-->
-<!--				data-asv-css-vars="[[dataAsvCssVars]]"-->
-<!--				class="sidebar-unit"-->
-<!--			>-->
-<!--			</d2l-sequence-launcher-unit>-->
 			<div id="content">
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>helloooo</div>
-				<div>9helloooo</div>
-				<div>8helloooo</div>
-				<div>7helloooo</div>
-				<div>6helloooo</div>
-				<div>5helloooo</div>
-				<div>4helloooo</div>
-				<div>3helloooo</div>
-				<div>2helloooo</div>
-				<div>1helloooo</div>
-				<div>END</div>
+				<d2l-sequence-launcher-unit
+					href="[[href]]"
+					token="[[token]]"
+					role="navigation"
+					data-asv-css-vars="[[dataAsvCssVars]]"
+					class="sidebar-unit"
+					is-sidebar
+				>
+				</d2l-sequence-launcher-unit>
 			</div>
 		</div>
 		`;
@@ -139,20 +92,7 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 	}
 	static get properties() {
 		return {
-			// TODO: add data-as-css-vars
-			telemetryClient: {
-				type: typeof TelemetryHelper,
-				value: function() {
-					return new TelemetryHelper();
-				}
-			},
-			// TODO: need the other properties, if needed
 		};
-	}
-
-	// TODO: check this, remove value?
-	_onEndOfLessonClick() {
-		this.telemetryClient.logTelemetryEvent('end-of-lesson-press');
 	}
 }
 customElements.define(D2LSequenceViewerSidebar.is, D2LSequenceViewerSidebar);

@@ -7,9 +7,6 @@ import './localize-behavior.js';
 import '@polymer/polymer/polymer-legacy.js';
 import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 import 'd2l-link/d2l-link.js';
-import 'd2l-sequences/d2l-sequence-navigator/d2l-sequence-navigator.js';
-import 'd2l-sequences/d2l-sequence-navigator/d2l-lesson-header.js';
-import 'd2l-sequences/d2l-sequence-navigator/d2l-sequence-end.js';
 import 'd2l-sequences/components/d2l-sequences-content-router.js';
 import 'd2l-navigation/d2l-navigation-button-notification-icon.js';
 import 'd2l-navigation/d2l-navigation-band.js';
@@ -52,7 +49,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 					height: var(--dynamic-viewframe-height);
 				}
 				.topbar {
-					position: fixed;
+					/*position: fixed;*/
 					top: 4px;
 					width: 100%;
 					height: 30px;
@@ -67,20 +64,18 @@ class D2LSequenceViewer extends mixinBehaviors([
 					overflow: hidden;
 					max-width: var(--viewer-max-width);
 					width: 100%;
-					margin: 56px auto auto;
+					margin: 30px auto 30px auto;
 				}
 				#sidebar-container {
-					/* TODO: dont use this weird calc */
-					height: calc(100% - 30px - 15px);
-
+					height: 100%;
 					z-index: 1;
 					flex: 1;
 					/*TODO: 462px;*/
-					max-width: 390px;
+					max-width: 462px;
 					position: relative;
 					overflow: hidden;
 					background: white;
-					padding-top: 30px;
+					/*padding-top: 30px;*/
 					-webkit-transition: max-width 0.4s ease-in-out;
 					-moz-transition: max-width 0.4s ease-in-out;
 					-o-transition: max-width 0.4s ease-in-out;
@@ -93,28 +88,12 @@ class D2LSequenceViewer extends mixinBehaviors([
 					-o-transition: max-width 0.4s ease-in-out;
 					transition: max-width 0.4s ease-in-out;
 				}
-				#sidebar {
-					overflow-y: none;
-					height: calc(100% + 56px - 5px);
-					padding: 0px;
-					background: white;
-					position: absolute;
-					right: 0;
-					left: 0;
-					-webkit-transition: left 0.4s ease-in-out;
-					-moz-transition: left 0.4s ease-in-out;
-					-o-transition: left 0.4s ease-in-out;
-					transition: left 0.4s ease-in-out;
-				}
-				#sidebar-container.offscreen #sidebar {
-					left: -310px;
-					-webkit-transition: left 0.4s ease-in-out;
-					-moz-transition: left 0.4s ease-in-out;
-					-o-transition: left 0.4s ease-in-out;
-					transition: left 0.4s ease-in-out;
-				}
 				#viewframe {
-					padding: 30px 30px 0 30px;
+					/* This extra 12px comes from sequences
+					inexplicably subtracting 12px from the height of the iframe,
+					and fixing that offset here will prevent a double scrollbar */
+					height: calc(100% + 12px);
+
 					-webkit-transition: all 0.4s ease-in-out;
 					-webkit-overflow-scrolling: auto;
 					-moz-transition: all 0.4s ease-in-out;
@@ -122,13 +101,14 @@ class D2LSequenceViewer extends mixinBehaviors([
 					transition: all 0.4s ease-in-out;
 					flex: 2;
 					box-sizing: border-box;
-					overflow: auto;
+					/*overflow: auto;*/
 				}
 				.viewer {
 					position: relative;
 					display: inline-block;
 					width: 100%;
-					height: calc(100% - 15px);
+					/*height: calc(100% - 15px);*/
+					height: 100%;
 					bottom: 0;
 					overflow-y: auto;
 				}
@@ -145,10 +125,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 				}
 				.d2l-sequence-viewer-navicon-container {
 					height: 50px;
-				}
-				d2l-sequence-navigator {
-					flex: 1;
-					--d2l-sequence-nav-padding: 30px;
 				}
 				#loadingscreen {
 					position: absolute;
@@ -197,31 +173,13 @@ class D2LSequenceViewer extends mixinBehaviors([
 						transition: left 0.4s ease-in-out;
 					}
 
-					#sidebar {
-						position: unset;
-						width: 100%;
-						right: unset;
-						left: unset;
-					}
-
-					d2l-sequence-navigator {
-						--d2l-sequence-nav-padding: 24px;
-					}
 					#viewframe {
-						padding: 18px 24px 0 24px;
+						padding: 18px 0 0 0;
 					}
 				}
 				@media(max-width: 767px) {
-					d2l-sequence-navigator {
-						--d2l-sequence-nav-padding: 18px;
-					}
 					#viewframe {
-						padding: 18px 18px 0 18px;
-					}
-				}
-				@media(max-width: 405px) {
-					#sidebar {
-						width: calc(100% - 25px);
+						padding: 18px 0 0 0;
 					}
 				}
 			</style>
@@ -244,7 +202,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 			</div>
 		</d2l-sequence-viewer-header>
 		<div id="view-container">
-
 			<div id="sidebar-container" class="offscreen">
 				<d2l-sequence-viewer-sidebar
 					href="{{href}}"
@@ -253,7 +210,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 				>
 				</d2l-sequence-viewer-sidebar>
 			</div>
-
 			<div id="viewframe" on-click="_closeSlidebarOnFocusContent" role="main" tabindex="0">
 				<d2l-sequences-content-router
 					id="viewer"
