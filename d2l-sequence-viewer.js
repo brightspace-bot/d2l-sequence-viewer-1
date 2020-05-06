@@ -98,7 +98,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 					transition: all 0.4s ease-in-out;
 					flex: 2;
 					box-sizing: border-box;
-					padding: 0 30px 30px 30px;
+					padding: 0 0 30px 30px;
 				}
 				.viewer {
 					position: relative;
