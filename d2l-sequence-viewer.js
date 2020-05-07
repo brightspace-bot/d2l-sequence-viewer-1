@@ -98,7 +98,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 					transition: all 0.4s ease-in-out;
 					flex: 2;
 					box-sizing: border-box;
-					padding: 0 0 30px 30px;
+					padding: 0 30px 30px 30px;
 				}
 				.viewer {
 					position: relative;
@@ -188,7 +188,13 @@ class D2LSequenceViewer extends mixinBehaviors([
 		<d2l-sequence-viewer-header class="topbar" href="{{href}}" token="[[token]]" role="banner" on-iterate="_onIterate" telemetry-client="[[telemetryClient]]" is-single-topic-view="[[_isSingleTopicView]]">
 			<template is="dom-if" if="{{!_isSingleTopicView}}">
 				<span slot="d2l-flyout-menu">
-					<d2l-navigation-button-notification-icon icon="d2l-tier3:menu-hamburger" class="flyout-icon" on-click="_toggleSlideSidebar" aria-label$="[[localize('toggleNavMenu')]]">[[localize('toggleNavMenu')]]
+					<d2l-navigation-button-notification-icon
+						icon="[[_sideNavIconName]]"
+						class="flyout-icon"
+						on-click="_toggleSlideSidebar"
+						aria-label$="[[localize('toggleNavMenu')]]"
+					>
+						[[localize('toggleNavMenu')]]
 					</d2l-navigation-button-notification-icon>
 				</span>
 			</template>
@@ -296,6 +302,10 @@ class D2LSequenceViewer extends mixinBehaviors([
 				value: function() {
 					return new TelemetryHelper();
 				}
+			},
+			_sideNavIconName: {
+				type: String,
+				value: 'tier1:menu-hamburger'
 			}
 		};
 	}
@@ -525,6 +535,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 	_sideBarOpen() {
 		const sidebarContainer = this.shadowRoot.getElementById('sidebar-container');
 		sidebarContainer.classList.remove('offscreen');
+		this._sideNavIconName = 'tier1:close-default';
 
 		this.telemetryClient.logTelemetryEvent('sidebar-open');
 	}
@@ -537,6 +548,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 			return;
 		}
 		sidebarContainer.classList.add('offscreen');
+		this._sideNavIconName = 'tier1:menu-hamburger';
 
 		this.telemetryClient.logTelemetryEvent('sidebar-close');
 	}
