@@ -39,6 +39,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 			<style is="custom-style" include="d2l-typography">
 				:host {
 					--viewer-max-width: 1170px;
+					--sidebar-max-width: 462px;
 
 					color: var(--d2l-color-ferrite);
 					@apply --d2l-body-standard-text;
@@ -67,12 +68,13 @@ class D2LSequenceViewer extends mixinBehaviors([
 				}
 				#sidebar-container {
 					height: 100%;
-					z-index: 1;
+					z-index: 2;
 					flex: 1;
-					max-width: 462px;
+					max-width: var(--sidebar-max-width);
 					position: relative;
 					overflow: hidden;
 					background: white;
+					border-radius: 6px 6px 0 0;
 					-webkit-transition: max-width 0.4s ease-in-out;
 					-moz-transition: max-width 0.4s ease-in-out;
 					-o-transition: max-width 0.4s ease-in-out;
@@ -105,7 +107,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 					display: inline-block;
 					width: 100%;
 					height: 100%;
-					/*bottom: 0;*/
 					overflow-y: auto;
 				}
 				#viewframe:focus {
@@ -147,10 +148,20 @@ class D2LSequenceViewer extends mixinBehaviors([
 					flex: 1;
 				}
 				@media(max-width: 929px) {
+					#view-container {
+						margin: 0;
+					}
+					#viewframe-focus-layer.show {
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						background: #000000BF;
+						z-index: 1;
+					}
 					#sidebar-container {
 						position: absolute;
-						width: 310px;
-						max-width: unset;
+						width: 80%;
+						max-width: var(--sidebar-max-width);
 						flex: unset;
 						height: 100%;
 						left: 0;
@@ -161,8 +172,8 @@ class D2LSequenceViewer extends mixinBehaviors([
 					}
 
 					#sidebar-container.offscreen {
-						max-width: unset;
-						left: -310px;
+						max-width: var(--sidebar-max-width);
+						left: calc(var(--sidebar-max-width) * -1);
 						-webkit-transition: left 0.4s ease-in-out;
 						-moz-transition: left 0.4s ease-in-out;
 						-o-transition: left 0.4s ease-in-out;
@@ -170,12 +181,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 					}
 
 					#viewframe {
-						padding: 18px 0 0 0;
-					}
-				}
-				@media(max-width: 767px) {
-					#viewframe {
-						padding: 18px 0 0 0;
+						padding: 0;
 					}
 				}
 			</style>
@@ -206,13 +212,15 @@ class D2LSequenceViewer extends mixinBehaviors([
 		<div id="view-container">
 			<div id="sidebar-container" class="offscreen">
 				<d2l-sequence-viewer-sidebar
-					href="{{href}}"
+					href="[[href]]"
+					rootHref="[[_rootHref]]"
 					token="[[token]]"
 					telemetry-client="[[telemetryClient]]"
 				>
 				</d2l-sequence-viewer-sidebar>
 			</div>
 			<div id="viewframe" on-click="_closeSlidebarOnFocusContent" role="main" tabindex="0">
+				<div id="viewframe-focus-layer"></div>
 				<d2l-sequences-content-router
 					id="viewer"
 					class="viewer"
@@ -534,7 +542,9 @@ class D2LSequenceViewer extends mixinBehaviors([
 
 	_sideBarOpen() {
 		const sidebarContainer = this.shadowRoot.getElementById('sidebar-container');
+		const viewframeFocusLayer = this.shadowRoot.getElementById('viewframe-focus-layer');
 		sidebarContainer.classList.remove('offscreen');
+		viewframeFocusLayer.classList.add('show');
 		this._sideNavIconName = 'tier1:close-default';
 
 		this.telemetryClient.logTelemetryEvent('sidebar-open');
@@ -542,6 +552,10 @@ class D2LSequenceViewer extends mixinBehaviors([
 
 	_sideBarClose() {
 		const sidebarContainer = this.shadowRoot.getElementById('sidebar-container');
+		const viewframeFocusLayer = this.shadowRoot.getElementById('viewframe-focus-layer');
+
+		viewframeFocusLayer.classList.remove('show');
+
 		// TODO: This a temp fix because this gets called EVERY click on the document,
 		// regardless of state. Find a better solution to handle this.
 		if (sidebarContainer.classList.contains('offscreen')) {

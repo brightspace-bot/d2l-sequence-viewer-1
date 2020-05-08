@@ -37,7 +37,6 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				flex-direction: column;
 			}
 			#content {
-				display: flex;
 				flex: 1;
 				overflow-y: auto;
 				overflow-x: hidden;
@@ -80,7 +79,6 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 					token="[[token]]"
 					role="navigation"
 					data-asv-css-vars="[[dataAsvCssVars]]"
-					class="sidebar-unit"
 					is-sidebar
 				>
 				</d2l-sequence-launcher-unit>
@@ -94,6 +92,9 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 	}
 	static get properties() {
 		return {
+			dataAsvCssVars: {
+				type: String
+			}
 		};
 	}
 }
