@@ -151,10 +151,14 @@ class D2LSequenceViewer extends mixinBehaviors([
 					#view-container {
 						margin: 0;
 					}
-					#viewframe-focus-layer.show {
+					#viewframe {
+						padding: 0;
+					}
+					#viewframe-fog-of-war.show {
 						position: absolute;
 						width: 100%;
 						height: 100%;
+						/* TODO: confirm this value with design */
 						background: #000000BF;
 						z-index: 1;
 					}
@@ -170,18 +174,13 @@ class D2LSequenceViewer extends mixinBehaviors([
 						-o-transition: left 0.4s ease-in-out;
 						transition: left 0.4s ease-in-out;
 					}
-
 					#sidebar-container.offscreen {
 						max-width: var(--sidebar-max-width);
-						left: calc(var(--sidebar-max-width) * -1);
+						left: calc(-1 * var(--sidebar-max-width));
 						-webkit-transition: left 0.4s ease-in-out;
 						-moz-transition: left 0.4s ease-in-out;
 						-o-transition: left 0.4s ease-in-out;
 						transition: left 0.4s ease-in-out;
-					}
-
-					#viewframe {
-						padding: 0;
 					}
 				}
 			</style>
@@ -213,14 +212,13 @@ class D2LSequenceViewer extends mixinBehaviors([
 			<div id="sidebar-container" class="offscreen">
 				<d2l-sequence-viewer-sidebar
 					href="[[href]]"
-					rootHref="[[_rootHref]]"
 					token="[[token]]"
-					telemetry-client="[[telemetryClient]]"
+					data-asv-css-vars="[[dataAsvCssVars]]"
 				>
 				</d2l-sequence-viewer-sidebar>
 			</div>
 			<div id="viewframe" on-click="_closeSlidebarOnFocusContent" role="main" tabindex="0">
-				<div id="viewframe-focus-layer"></div>
+				<div id="viewframe-fog-of-war"></div>
 				<d2l-sequences-content-router
 					id="viewer"
 					class="viewer"
@@ -542,9 +540,9 @@ class D2LSequenceViewer extends mixinBehaviors([
 
 	_sideBarOpen() {
 		const sidebarContainer = this.shadowRoot.getElementById('sidebar-container');
-		const viewframeFocusLayer = this.shadowRoot.getElementById('viewframe-focus-layer');
+		const viewframeFogOfWar = this.shadowRoot.getElementById('viewframe-fog-of-war');
 		sidebarContainer.classList.remove('offscreen');
-		viewframeFocusLayer.classList.add('show');
+		viewframeFogOfWar.classList.add('show');
 		this._sideNavIconName = 'tier1:close-default';
 
 		this.telemetryClient.logTelemetryEvent('sidebar-open');
@@ -552,9 +550,9 @@ class D2LSequenceViewer extends mixinBehaviors([
 
 	_sideBarClose() {
 		const sidebarContainer = this.shadowRoot.getElementById('sidebar-container');
-		const viewframeFocusLayer = this.shadowRoot.getElementById('viewframe-focus-layer');
+		const viewframeFogOfWar = this.shadowRoot.getElementById('viewframe-fog-of-war');
 
-		viewframeFocusLayer.classList.remove('show');
+		viewframeFogOfWar.classList.remove('show');
 
 		// TODO: This a temp fix because this gets called EVERY click on the document,
 		// regardless of state. Find a better solution to handle this.

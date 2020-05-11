@@ -10,27 +10,12 @@ import 'd2l-sequences/d2l-sequence-launcher-unit/d2l-sequence-launcher-unit.js';
 import 'd2l-sequences/d2l-sequence-navigator/d2l-lesson-header.js';
 import 'd2l-sequences/d2l-sequence-navigator/d2l-sequence-end.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
-import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-import '../localize-behavior.js';
 
-/**
- * @polymer
- * @customelement
- * @extends Polymer.Element
- * @extends Polymer.mixinBehaviors
- * @appliesMixin D2L.PolymerBehaviors.Siren.EntityBehavior
- */
-class D2LSequenceViewerSidebar extends mixinBehaviors([
-	D2L.PolymerBehaviors.Siren.EntityBehavior,
-	D2L.PolymerBehaviors.SequenceViewer.LocalizeBehavior
-], PolymerElement) {
+class D2LSequenceViewerSidebar extends PolymerElement {
 	static get template() {
 		return html`
 		<style>
-			:host {
-
-			}
 			#sidebar {
 				height: 100%;
 				display: flex;
@@ -39,7 +24,6 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 			#content {
 				flex: 1;
 				overflow-y: auto;
-				overflow-x: hidden;
 				border: 1px solid var(--d2l-color-mica);
 				border-top: none;
 				border-bottom: none;
@@ -92,6 +76,12 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 	}
 	static get properties() {
 		return {
+			href: {
+				type: String
+			},
+			token: {
+				type: String
+			},
 			dataAsvCssVars: {
 				type: String
 			}
