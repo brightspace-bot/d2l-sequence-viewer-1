@@ -9,6 +9,7 @@ import 'd2l-sequences/components/d2l-sequences-iterator.js';
 import 'd2l-sequences/d2l-sequence-launcher-unit/d2l-sequence-launcher-unit.js';
 import 'd2l-sequences/d2l-sequence-navigator/d2l-lesson-header.js';
 import 'd2l-sequences/d2l-sequence-navigator/d2l-sequence-end.js';
+import 'd2l-sequences/d2l-sequence-navigator/d2l-module-completion-count.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
@@ -63,6 +64,7 @@ class D2LSequenceViewerSidebar extends PolymerElement {
 					token="[[token]]"
 					role="navigation"
 					data-asv-css-vars="[[dataAsvCssVars]]"
+					show-loading-skeleton="[[showLoadingSkeleton]]"
 					is-sidebar
 				>
 				</d2l-sequence-launcher-unit>
@@ -84,6 +86,10 @@ class D2LSequenceViewerSidebar extends PolymerElement {
 			},
 			dataAsvCssVars: {
 				type: String
+			},
+			showLoadingSkeleton: {
+				type: Boolean,
+				value: false
 			}
 		};
 	}
