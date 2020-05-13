@@ -35,8 +35,8 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				border-top-right-radius: 6px;
 				display: flex;
 				justify-content: space-between;
-				background-color: var(--d2l-color-celestine);
-				color: var(--d2l-asv-primary-color);
+				background-color: var(--d2l-asv-primary-color);
+				color: var(--d2l-asv-text-color);
 				min-width: 250px;
 				padding: 13px 24px;
 				font-size: 16px;
