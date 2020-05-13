@@ -158,7 +158,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 						position: absolute;
 						width: 100%;
 						height: 100%;
-						/* TODO: confirm this value with design */
 						background: #000000BF;
 						z-index: 1;
 					}
