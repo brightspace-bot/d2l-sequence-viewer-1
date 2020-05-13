@@ -248,7 +248,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 			href: {
 				type: String,
 				reflectToAttribute: true,
-				observer: '_hrefChanged',
 				notify: true
 			},
 			_rootHref: {
@@ -396,10 +395,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 			PerformanceHelper.perfMeasure('api-call-finish', 'mark-api-call-start', 'mark-api-call-end');
 			this.telemetryClient.logPerformanceEvent('on-content-load', 'api-call-finish');
 		}
-	}
-
-	_hrefChanged() {
-		this.$.viewframe.focus();
 	}
 
 	_titleChanged(title) {
