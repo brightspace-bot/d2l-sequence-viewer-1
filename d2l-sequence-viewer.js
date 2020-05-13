@@ -210,7 +210,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 		<div id="view-container">
 			<div id="sidebar-container" class="offscreen">
 				<d2l-sequence-viewer-sidebar
-					href="[[href]]"
+					href="{{href}}"
 					token="[[token]]"
 					data-asv-css-vars="[[dataAsvCssVars]]"
 				>

@@ -62,7 +62,7 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 			</div>
 			<div id="content">
 				<d2l-sequence-launcher-unit
-					href="[[href]]"
+					href="{{href}}"
 					token="[[token]]"
 					role="navigation"
 					data-asv-css-vars="[[dataAsvCssVars]]"
@@ -86,7 +86,9 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 	static get properties() {
 		return {
 			href: {
-				type: String
+				type: String,
+				reflectToAttribute: true,
+				notify: true
 			},
 			token: {
 				type: String
