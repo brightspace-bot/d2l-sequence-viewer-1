@@ -1,9 +1,6 @@
 import '@polymer/polymer/polymer-legacy.js';
 import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 import 'd2l-colors/d2l-colors.js';
-import 'd2l-icons/d2l-icons.js';
-import 'd2l-icons/tier2-icons.js';
-import 'd2l-icons/tier3-icons.js';
 import 'd2l-typography/d2l-typography.js';
 import 'd2l-sequences/components/d2l-sequences-iterator.js';
 import 'd2l-sequences/d2l-sequence-launcher-unit/d2l-sequence-launcher-unit.js';
@@ -12,8 +9,11 @@ import 'd2l-sequences/d2l-sequence-navigator/d2l-sequence-end.js';
 import 'd2l-sequences/d2l-sequence-navigator/d2l-module-completion-count.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 
-class D2LSequenceViewerSidebar extends PolymerElement {
+class D2LSequenceViewerSidebar extends mixinBehaviors([
+	D2L.PolymerBehaviors.Siren.EntityBehavior,
+], PolymerElement) {
 	static get template() {
 		return html`
 		<style>
@@ -28,6 +28,7 @@ class D2LSequenceViewerSidebar extends PolymerElement {
 				border: 1px solid var(--d2l-color-mica);
 				border-top: none;
 				border-bottom: none;
+				min-width: 250px;
 			}
 			.m-module-heading {
 				border-top-left-radius: 6px;
@@ -35,7 +36,8 @@ class D2LSequenceViewerSidebar extends PolymerElement {
 				display: flex;
 				justify-content: space-between;
 				background-color: var(--d2l-color-celestine);
-				color: white;
+				color: var(--d2l-asv-primary-color);
+				min-width: 250px;
 				padding: 13px 24px;
 				font-size: 16px;
 			}
@@ -46,13 +48,13 @@ class D2LSequenceViewerSidebar extends PolymerElement {
 		<div id="sidebar">
 			<div class="m-module-heading">
 				<d2l-sequences-module-name
-					href="[[href]]"
+					href="[[rootHref]]"
 					token="[[token]]"
 					class="m-module-heading-title"
 				>
 				</d2l-sequences-module-name>
 				<d2l-module-completion-count
-					href="[[href]]"
+					href="[[rootHref]]"
 					token="[[token]]"
 					class="m-module-heading-completion"
 				>
@@ -73,6 +75,11 @@ class D2LSequenceViewerSidebar extends PolymerElement {
 		`;
 	}
 
+	_getRootHref(entity) {
+		const rootLink = entity && entity.getLinkByRel('https://sequences.api.brightspace.com/rels/sequence-root');
+		return rootLink && rootLink.href || '';
+	}
+
 	static get is() {
 		return 'd2l-sequence-viewer-sidebar';
 	}
@@ -90,6 +97,10 @@ class D2LSequenceViewerSidebar extends PolymerElement {
 			showLoadingSkeleton: {
 				type: Boolean,
 				value: false
+			},
+			rootHref: {
+				type: String,
+				computed: '_getRootHref(entity)'
 			}
 		};
 	}
