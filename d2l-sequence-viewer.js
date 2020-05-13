@@ -158,7 +158,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 						position: absolute;
 						width: 100%;
 						height: 100%;
-						background: #000000BF;
+						background: #4A4C4E60;
 						z-index: 1;
 					}
 					#sidebar-container {
