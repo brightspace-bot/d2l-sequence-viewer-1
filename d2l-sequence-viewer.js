@@ -2,13 +2,11 @@ import 'd2l-typography/d2l-typography.js';
 import 'd2l-colors/d2l-colors.js';
 import './components/sequence-viewer-header.js';
 import './components/d2l-sequence-viewer-new-content-alert.js';
+import './components/d2l-sequence-viewer-sidebar.js';
 import './localize-behavior.js';
 import '@polymer/polymer/polymer-legacy.js';
 import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 import 'd2l-link/d2l-link.js';
-import 'd2l-sequences/d2l-sequence-navigator/d2l-sequence-navigator.js';
-import 'd2l-sequences/d2l-sequence-navigator/d2l-lesson-header.js';
-import 'd2l-sequences/d2l-sequence-navigator/d2l-sequence-end.js';
 import 'd2l-sequences/components/d2l-sequences-content-router.js';
 import 'd2l-navigation/d2l-navigation-button-notification-icon.js';
 import 'd2l-navigation/d2l-navigation-band.js';
@@ -41,6 +39,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 			<style is="custom-style" include="d2l-typography">
 				:host {
 					--viewer-max-width: 1170px;
+					--sidebar-max-width: 462px;
 
 					color: var(--d2l-color-ferrite);
 					@apply --d2l-body-standard-text;
@@ -51,31 +50,31 @@ class D2LSequenceViewer extends mixinBehaviors([
 					height: var(--dynamic-viewframe-height);
 				}
 				.topbar {
-					position: fixed;
 					top: 4px;
 					width: 100%;
 					height: 30px;
 					z-index: 3;
-					box-shadow: 2px 0px 3px 2px rgba(214,220,229,0.5); /* 50% D6DCE5 */
+					box-shadow: 2px 0 3px 2px rgba(214,220,229,0.5); /* 50% D6DCE5 */
 					flex-flow: row;
 				}
 				#view-container {
-					flex: 1 1 0px;
+					flex: 1 1 0;
 					display: flex;
 					position: relative;
 					overflow: hidden;
 					max-width: var(--viewer-max-width);
-					margin: auto;
 					width: 100%;
-					margin-top: 56px;
+					margin: 30px auto 0 auto;
 				}
 				#sidebar-container {
-					z-index: 1;
+					height: 100%;
+					z-index: 2;
 					flex: 1;
-					max-width: 390px;
+					max-width: var(--sidebar-max-width);
 					position: relative;
 					overflow: hidden;
 					background: white;
+					border-radius: 6px 6px 0 0;
 					-webkit-transition: max-width 0.4s ease-in-out;
 					-moz-transition: max-width 0.4s ease-in-out;
 					-o-transition: max-width 0.4s ease-in-out;
@@ -88,28 +87,12 @@ class D2LSequenceViewer extends mixinBehaviors([
 					-o-transition: max-width 0.4s ease-in-out;
 					transition: max-width 0.4s ease-in-out;
 				}
-				#sidebar {
-					overflow-y: none;
-					height: calc(100% + 56px - 5px);
-					padding: 0px;
-					background: white;
-					position: absolute;
-					right: 0;
-					left: 0;
-					-webkit-transition: left 0.4s ease-in-out;
-					-moz-transition: left 0.4s ease-in-out;
-					-o-transition: left 0.4s ease-in-out;
-					transition: left 0.4s ease-in-out;
-				}
-				#sidebar-container.offscreen #sidebar {
-					left: -310px;
-					-webkit-transition: left 0.4s ease-in-out;
-					-moz-transition: left 0.4s ease-in-out;
-					-o-transition: left 0.4s ease-in-out;
-					transition: left 0.4s ease-in-out;
-				}
 				#viewframe {
-					padding: 24px 30px 0 30px;
+					/* This extra 12px comes from sequences
+					inexplicably subtracting 12px from the height of the iframe,
+					and fixing that offset here will prevent a double scrollbar */
+					height: calc(100% + 12px);
+
 					-webkit-transition: all 0.4s ease-in-out;
 					-webkit-overflow-scrolling: auto;
 					-moz-transition: all 0.4s ease-in-out;
@@ -117,15 +100,13 @@ class D2LSequenceViewer extends mixinBehaviors([
 					transition: all 0.4s ease-in-out;
 					flex: 2;
 					box-sizing: border-box;
-					overflow: auto;
+					padding: 0 0 30px 30px;
 				}
 				.viewer {
 					position: relative;
 					display: inline-block;
 					width: 100%;
-					height: calc(100% - 15px);
-					padding-top: 5px;
-					bottom: 0px;
+					height: 100%;
 					overflow-y: auto;
 				}
 				#viewframe:focus {
@@ -141,10 +122,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 				}
 				.d2l-sequence-viewer-navicon-container {
 					height: 50px;
-				}
-				d2l-sequence-navigator {
-					flex: 1;
-					--d2l-sequence-nav-padding: 30px;
 				}
 				#loadingscreen {
 					position: absolute;
@@ -171,10 +148,23 @@ class D2LSequenceViewer extends mixinBehaviors([
 					flex: 1;
 				}
 				@media(max-width: 929px) {
+					#view-container {
+						margin: 0;
+					}
+					#viewframe {
+						padding: 0;
+					}
+					#viewframe-fog-of-war.show {
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						background: #4A4C4E60;
+						z-index: 1;
+					}
 					#sidebar-container {
 						position: absolute;
-						width: 310px;
-						max-width: unset;
+						width: 80%;
+						max-width: var(--sidebar-max-width);
 						flex: unset;
 						height: 100%;
 						left: 0;
@@ -183,41 +173,13 @@ class D2LSequenceViewer extends mixinBehaviors([
 						-o-transition: left 0.4s ease-in-out;
 						transition: left 0.4s ease-in-out;
 					}
-
 					#sidebar-container.offscreen {
-						max-width: unset;
-						left: -310px;
+						max-width: var(--sidebar-max-width);
+						left: calc(-1 * var(--sidebar-max-width));
 						-webkit-transition: left 0.4s ease-in-out;
 						-moz-transition: left 0.4s ease-in-out;
 						-o-transition: left 0.4s ease-in-out;
 						transition: left 0.4s ease-in-out;
-					}
-
-					#sidebar {
-						position: unset;
-						width: 100%;
-						right: unset;
-						left: unset;
-					}
-
-					d2l-sequence-navigator {
-						--d2l-sequence-nav-padding: 24px;
-					}
-					#viewframe {
-						padding: 18px 24px 0 24px;
-					}
-				}
-				@media(max-width: 767px) {
-					d2l-sequence-navigator {
-						--d2l-sequence-nav-padding: 18px;
-					}
-					#viewframe {
-						padding: 18px 18px 0 18px;
-					}
-				}
-				@media(max-width: 405px) {
-					#sidebar {
-						width: calc(100% - 25px);
 					}
 				}
 			</style>
@@ -230,7 +192,13 @@ class D2LSequenceViewer extends mixinBehaviors([
 		<d2l-sequence-viewer-header class="topbar" href="{{href}}" token="[[token]]" role="banner" on-iterate="_onIterate" telemetry-client="[[telemetryClient]]" is-single-topic-view="[[_isSingleTopicView]]">
 			<template is="dom-if" if="{{!_isSingleTopicView}}">
 				<span slot="d2l-flyout-menu">
-					<d2l-navigation-button-notification-icon icon="d2l-tier3:menu-hamburger" class="flyout-icon" on-click="_toggleSlideSidebar" aria-label$="[[localize('toggleNavMenu')]]">[[localize('toggleNavMenu')]]
+					<d2l-navigation-button-notification-icon
+						icon="[[_sideNavIconName]]"
+						class="flyout-icon"
+						on-click="_toggleSlideSidebar"
+						aria-label$="[[localize('toggleNavMenu')]]"
+					>
+						[[localize('toggleNavMenu')]]
 					</d2l-navigation-button-notification-icon>
 				</span>
 			</template>
@@ -241,28 +209,15 @@ class D2LSequenceViewer extends mixinBehaviors([
 		</d2l-sequence-viewer-header>
 		<div id="view-container">
 			<div id="sidebar-container" class="offscreen">
-				<div id="sidebar">
-					<d2l-sequence-navigator
-						href="{{href}}"
-						token="[[token]]"
-						role="navigation"
-						data-asv-css-vars="[[dataAsvCssVars]]"
-						>
-						<span slot="lesson-header">
-							<d2l-lesson-header id="sidebarHeader"
-											href="[[_rootHref]]"
-											current-activity="{{href}}"
-											module-properties="[[_moduleProperties]]"
-											token="[[token]]">
-							</d2l-lesson-header>
-						</span>
-						<span slot="end-of-lesson" on-click="_onEndOfLessonClick">
-							<d2l-sequence-end href="[[_sequenceEndHref]]" token="[[token]]" current-activity="{{href}}" text="[[localize('endOfSequence')]]"></d2l-sequence-end>
-						</span>
-					</d2l-sequence-navigator>
-				</div>
+				<d2l-sequence-viewer-sidebar
+					href="{{href}}"
+					token="[[token]]"
+					data-asv-css-vars="[[dataAsvCssVars]]"
+				>
+				</d2l-sequence-viewer-sidebar>
 			</div>
 			<div id="viewframe" on-click="_closeSlidebarOnFocusContent" role="main" tabindex="0">
+				<div id="viewframe-fog-of-war"></div>
 				<d2l-sequences-content-router
 					id="viewer"
 					class="viewer"
@@ -293,7 +248,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 			href: {
 				type: String,
 				reflectToAttribute: true,
-				observer: '_hrefChanged',
 				notify: true
 			},
 			_rootHref: {
@@ -352,6 +306,10 @@ class D2LSequenceViewer extends mixinBehaviors([
 				value: function() {
 					return new TelemetryHelper();
 				}
+			},
+			_sideNavIconName: {
+				type: String,
+				value: 'tier1:menu-hamburger'
 			}
 		};
 	}
@@ -437,10 +395,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 			PerformanceHelper.perfMeasure('api-call-finish', 'mark-api-call-start', 'mark-api-call-end');
 			this.telemetryClient.logPerformanceEvent('on-content-load', 'api-call-finish');
 		}
-	}
-
-	_hrefChanged() {
-		this.$.viewframe.focus();
 	}
 
 	_titleChanged(title) {
@@ -580,19 +534,27 @@ class D2LSequenceViewer extends mixinBehaviors([
 
 	_sideBarOpen() {
 		const sidebarContainer = this.shadowRoot.getElementById('sidebar-container');
+		const viewframeFogOfWar = this.shadowRoot.getElementById('viewframe-fog-of-war');
 		sidebarContainer.classList.remove('offscreen');
+		viewframeFogOfWar.classList.add('show');
+		this._sideNavIconName = 'tier1:close-default';
 
 		this.telemetryClient.logTelemetryEvent('sidebar-open');
 	}
 
 	_sideBarClose() {
 		const sidebarContainer = this.shadowRoot.getElementById('sidebar-container');
+		const viewframeFogOfWar = this.shadowRoot.getElementById('viewframe-fog-of-war');
+
+		viewframeFogOfWar.classList.remove('show');
+
 		// TODO: This a temp fix because this gets called EVERY click on the document,
 		// regardless of state. Find a better solution to handle this.
 		if (sidebarContainer.classList.contains('offscreen')) {
 			return;
 		}
 		sidebarContainer.classList.add('offscreen');
+		this._sideNavIconName = 'tier1:menu-hamburger';
 
 		this.telemetryClient.logTelemetryEvent('sidebar-close');
 	}
@@ -608,10 +570,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 		this.updateStyles({
 			'--dynamic-viewframe-height': `${window.innerHeight}px`
 		});
-	}
-
-	_onEndOfLessonClick() {
-		this.telemetryClient.logTelemetryEvent('end-of-lesson-press');
 	}
 }
 customElements.define(D2LSequenceViewer.is, D2LSequenceViewer);
