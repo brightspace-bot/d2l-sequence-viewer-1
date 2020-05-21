@@ -40,7 +40,7 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				font-weight: normal;
 			}
 			.m-module-heading:hover {
-				/* TODO: add hover background color */
+				background-color: var(--d2l-asv-header-hover-color);
 			}
 		</style>
 		<div id="sidebar">
