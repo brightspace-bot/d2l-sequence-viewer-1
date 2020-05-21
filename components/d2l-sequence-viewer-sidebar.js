@@ -32,16 +32,15 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 			.m-module-heading {
 				border-top-left-radius: 6px;
 				border-top-right-radius: 6px;
-				display: flex;
-				justify-content: space-between;
 				background-color: var(--d2l-asv-primary-color);
-				color: var(--d2l-asv-text-color);
 				min-width: 250px;
-				padding: 13px 24px;
-				font-size: 16px;
+				padding: 18px 30px;
 			}
 			.m-module-heading-completion {
 				font-weight: normal;
+			}
+			.m-module-heading:hover {
+				/* TODO: add hover background color */
 			}
 		</style>
 		<div id="sidebar">
