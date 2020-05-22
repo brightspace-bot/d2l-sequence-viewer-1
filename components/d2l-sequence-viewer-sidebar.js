@@ -62,6 +62,9 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				width: calc(100% - 16px);
 				height: calc(100% - 14px);
 			}
+			:host([header-active]) .m-module-heading {
+				background-color: var(--d2l-asv-header-hover-color);
+			}
 		</style>
 		<div id="sidebar">
 			<div class="m-module-heading">
@@ -93,6 +96,10 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 		return rootLink && rootLink.href || '';
 	}
 
+	_isHeaderActive(href, rootHref) {
+		return rootHref === href;
+	}
+
 	static get is() {
 		return 'd2l-sequence-viewer-sidebar';
 	}
@@ -116,6 +123,11 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 			rootHref: {
 				type: String,
 				computed: '_getRootHref(entity)'
+			},
+			headerActive: {
+				type: Boolean,
+				computed: '_isHeaderActive(href, rootHref)',
+				reflectToAttribute: true
 			}
 		};
 	}
