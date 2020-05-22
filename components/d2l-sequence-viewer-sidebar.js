@@ -36,7 +36,7 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				align-items: center;
 				background-color: var(--d2l-asv-primary-color);
 				min-width: 250px;
-				padding: 18px 30px;
+				padding: 14px 26px;
 			}
 			.m-module-heading-completion {
 				font-weight: normal;
