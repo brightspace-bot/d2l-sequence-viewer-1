@@ -18,6 +18,7 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 		<style>
 			#sidebar {
 				height: 100%;
+				width:100%;
 				display: flex;
 				flex-direction: column;
 			}
@@ -30,8 +31,9 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				min-width: 250px;
 			}
 			.m-module-heading {
-				border-top-left-radius: 6px;
-				border-top-right-radius: 6px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 				background-color: var(--d2l-asv-primary-color);
 				min-width: 250px;
 				padding: 18px 30px;
@@ -42,14 +44,34 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 			.m-module-heading:hover {
 				background-color: var(--d2l-asv-header-hover-color);
 			}
+			div.border {
+				box-sizing: border-box;
+				width: 100%;
+				height: 100%;
+			}
+			.m-module-heading:focus,
+			.m-module-heading:focus-within div.border {
+				border-style: solid;
+				border-width: 2px;
+				border-color: var(--d2l-asv-text-color);
+				border-radius: 6px;
+			}
+			.m-module-heading:focus,
+			.m-module-heading:focus-within d2l-lesson-header {
+				padding: 4px;
+				width: calc(100% - 8px);
+				height: calc(100% - 8px);
+			}
 		</style>
 		<div id="sidebar">
 			<div class="m-module-heading">
-				<d2l-lesson-header id="sidebarHeader"
-					href="[[rootHref]]"
-					current-activity="{{href}}"
-					token="[[token]]">
-				</d2l-lesson-header>
+				<div class="border">
+					<d2l-lesson-header id="sidebarHeader"
+						href="[[rootHref]]"
+						current-activity="{{href}}"
+						token="[[token]]">
+					</d2l-lesson-header>
+				</div>
 			</div>
 			<div id="content">
 				<d2l-sequence-launcher-unit
