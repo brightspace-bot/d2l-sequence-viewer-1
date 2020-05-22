@@ -116,12 +116,16 @@ class D2LSequenceViewer extends mixinBehaviors([
 					display: none;
 				}
 				.flyout-icon {
-					font-size: 0px;
+					font-size: 0;
 					display: block;
-					height: 50px;
+					height: 60px;
 				}
 				.d2l-sequence-viewer-navicon-container {
-					height: 50px;
+					/*TODO: put this 60px height in a var*/
+					height: 60px;
+				}
+				.hello {
+					height: 60px;
 				}
 				#loadingscreen {
 					position: absolute;
@@ -191,7 +195,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 		<d2l-navigation-band></d2l-navigation-band>
 		<d2l-sequence-viewer-header class="topbar" href="{{href}}" token="[[token]]" role="banner" on-iterate="_onIterate" telemetry-client="[[telemetryClient]]" is-single-topic-view="[[_isSingleTopicView]]">
 			<template is="dom-if" if="{{!_isSingleTopicView}}">
-				<span slot="d2l-flyout-menu">
+				<span slot="d2l-flyout-menu" class="hello">
 					<d2l-navigation-button-notification-icon
 						icon="[[_sideNavIconName]]"
 						class="flyout-icon"

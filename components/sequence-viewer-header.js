@@ -5,7 +5,7 @@ import 'd2l-icons/d2l-icons.js';
 import 'd2l-icons/tier2-icons.js';
 import 'd2l-icons/tier3-icons.js';
 import 'd2l-typography/d2l-typography.js';
-import 'd2l-sequences/components/d2l-sequences-iterator.js';
+import './d2l-sequence-viewer-iterator.js';
 import { IronA11yAnnouncer } from '@polymer/iron-a11y-announcer/iron-a11y-announcer.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
@@ -39,6 +39,30 @@ PolymerElement) {
 			#right-content {
 				display: flex;
 				align-items: center;
+				justify-content: space-between;
+			}
+			#left-content {
+				padding-left: 30px;
+				/*TODO: this number will have to come from the size of the sidebar*/
+				width: calc(312px - 30px);
+			}
+			.back-to-module {
+				@apply --d2l-body-small-text;
+				/*overflow: hidden;*/
+				/*white-space: nowrap;*/
+				/*text-overflow: ellipsis;*/
+				/*padding-left: 8px;*/
+				margin-left: 0;
+			}
+			.flyout-menu {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				margin-left: auto;
+			}
+			.d2l-flyout-menu {
+				/*divider icon has inherent padding, otherwise it would be 30 horizontally*/
+				padding: 0 30px 0 15px;
 			}
 			.topic-name {
 				@apply --d2l-body-compact-text;
@@ -47,28 +71,22 @@ PolymerElement) {
 				white-space: nowrap;
 				text-overflow: ellipsis;
 
-				position: absolute;
-				left: 0;
-				right: 0;
+				/*position: absolute;*/
+				/*left: 0;*/
+				/*right: 0;*/
+				/*margin: 0 auto;*/
 			}
 			.iterator-icon {
-				width: 30px;
-				font-size: 0;
-				display: block;
+				/*width: 30px;*/
+				/*font-size: 0;*/
+				/*display: block;*/
 			}
 			.flyout-divider {
 				color: var(--d2l-color-corundum);
-				height: 23px;
-				width: 23px;
-				font-size: 0;
-				display: block;
-			}
-			.back-to-module {
-				@apply --d2l-body-small-text;
-				overflow: hidden;
-				white-space: nowrap;
-				text-overflow: ellipsis;
-				padding-left: 8px;
+				/*height: 23px;*/
+				/*width: 23px;*/
+				/*font-size: 0;*/
+				/*display: block;*/
 			}
 			@media(max-width: 929px) {
 				.hidden-small {
@@ -82,30 +100,32 @@ PolymerElement) {
 			<div id="container">
 
 				<div id="left-content">
-					<slot name="d2l-flyout-menu" d2l-flyout-menu=""></slot>
-
-					<template is="dom-if" if="[[!isSingleTopicView]]">
-						<d2l-icon class="flyout-divider hidden-small" icon="d2l-tier2:divider-big"></d2l-icon>
-					</template>
-
 					<div class="back-to-module">
 						<slot name="d2l-back-to-module"></slot>
+					</div>
+
+					<div class="flyout-menu">
+						<template is="dom-if" if="[[!isSingleTopicView]]">
+							<d2l-icon class="flyout-divider hidden-small" icon="d2l-tier2:divider-big"></d2l-icon>
+						</template>
+						<div class="d2l-flyout-menu">
+							<slot name="d2l-flyout-menu" d2l-flyout-menu=""></slot>
+						</div>
 					</div>
 				</div>
 
 				<div class="topic-name hidden-small">
-					<h1>
-						[[currentContentName]]
-					</h1>
+					<h1>[[currentContentName]]</h1>
 				</div>
 
 				<div id="right-content">
 					<template is="dom-if" if="[[!isSingleTopicView]]">
-						<d2l-sequences-iterator class="iterator-icon prev-button" current-activity="{{href}}" href="[[previousActivityHref]]" token="[[token]]" icon="d2l-tier3:chevron-left-circle" previous="" on-click="_onPreviousPress"></d2l-sequences-iterator>
+						<d2l-sequence-viewer-iterator class="iterator-icon prev-button" current-activity="{{href}}" href="[[previousActivityHref]]" token="[[token]]" icon="d2l-tier3:chevron-left-circle" previous="" on-click="_onPreviousPress"></d2l-sequence-viewer-iterator>
 						<d2l-icon class="flyout-divider" icon="d2l-tier2:divider-big"></d2l-icon>
-						<d2l-sequences-iterator class="iterator-icon next-button" current-activity="{{href}}" href="[[nextActivityHref]]" token="[[token]]" icon="d2l-tier3:chevron-right-circle" next="" on-click="_onNextPress"></d2l-sequences-iterator>
+						<d2l-sequence-viewer-iterator class="iterator-icon next-button" current-activity="{{href}}" href="[[nextActivityHref]]" token="[[token]]" icon="d2l-tier3:chevron-right-circle" next="" on-click="_onNextPress"></d2l-sequence-viewer-iterator>
 					</template>
 				</div>
+
 			</div>
 		`;
 	}
