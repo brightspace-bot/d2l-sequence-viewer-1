@@ -36,7 +36,7 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				align-items: center;
 				background-color: var(--d2l-asv-primary-color);
 				min-width: 250px;
-				padding: 14px 26px;
+				padding: 8px 20px;
 			}
 			.m-module-heading-completion {
 				font-weight: normal;
@@ -58,9 +58,9 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 			}
 			.m-module-heading:focus,
 			.m-module-heading:focus-within d2l-lesson-header {
-				padding: 4px;
-				width: calc(100% - 8px);
-				height: calc(100% - 8px);
+				padding: 7px 8px;
+				width: calc(100% - 16px);
+				height: calc(100% - 14px);
 			}
 		</style>
 		<div id="sidebar">
