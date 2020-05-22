@@ -50,9 +50,9 @@ class D2LSequenceViewer extends mixinBehaviors([
 					height: var(--dynamic-viewframe-height);
 				}
 				.topbar {
-					top: 4px;
-					width: 100%;
-					height: 30px;
+					/*top: 4px;*/
+					/*width: 100%;*/
+					/*height: 30px;*/
 					z-index: 3;
 					box-shadow: 2px 0 3px 2px rgba(214,220,229,0.5); /* 50% D6DCE5 */
 					flex-flow: row;
