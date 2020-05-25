@@ -28,6 +28,12 @@ PolymerElement) {
 	static get template() {
 		return html`
 		<style>
+			:host([is-sidebar-closed]) #left-inner {
+				max-width: 290px;
+				border-right: none;
+				box-shadow: none;
+			}
+
 			#container {
 				display: flex;
 				align-items: center;
@@ -38,25 +44,41 @@ PolymerElement) {
 			:host([is-sidebar-open]) #container {
 				/*background: red;*/
 			}
-			#left-content,
+			#left-content {
+				display: flex;
+				flex: 1;
+			}
+			#left-inner,
 			#right-content {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
 			}
-			#left-content {
+			#left-inner {
 				/*padding-left: 24px;*/
 				/*TODO: this number will have to come from the size of the sidebar, subtract the left padding*/
 				/*width: calc(312px - 24px);*/
-				width: 570px;
+				/*width: 570px;*/
+				max-width: 570px;
 				/*TODO: only show this on open*/
 				border-right: 1px solid #00000029;
+				flex: 1;
+
+				box-shadow: 2px 0 12px #00000029;
+				-webkit-transition: max-width 0.4s ease-in-out;
+				-moz-transition: max-width 0.4s ease-in-out;
+				-o-transition: max-width 0.4s ease-in-out;
+				transition: max-width 0.4s ease-in-out;
 			}
 			#right-content {
-				padding-right: 24px;
+				flex: 1;
+				justify-content: flex-end;
 			}
 			#right-content .flyout-divider {
 				padding: 0 24px;
+			}
+			#right-content d2l-sequence-viewer-iterator.next-button {
+				padding-right: 24px;
 			}
 			.back-to-module {
 				@apply --d2l-body-small-text;
@@ -88,6 +110,8 @@ PolymerElement) {
 				/*left: 0;*/
 				/*right: 0;*/
 				/*margin: 0 auto;*/
+				max-width: 1170px;
+				flex: 1;
 			}
 			.iterator-icon {
 				/*width: 30px;*/
@@ -113,16 +137,18 @@ PolymerElement) {
 			<div id="container">
 
 				<div id="left-content">
-					<div class="back-to-module">
-						<slot name="d2l-back-to-module"></slot>
-					</div>
+					<div id="left-inner">
+						<div class="back-to-module">
+							<slot name="d2l-back-to-module"></slot>
+						</div>
 
-					<div class="flyout-menu">
-						<template is="dom-if" if="[[!isSingleTopicView]]">
-							<d2l-icon class="flyout-divider hidden-small" icon="d2l-tier2:divider-big"></d2l-icon>
-						</template>
-						<div class="d2l-flyout-menu">
-							<slot name="d2l-flyout-menu" d2l-flyout-menu=""></slot>
+						<div class="flyout-menu">
+							<template is="dom-if" if="[[!isSingleTopicView]]">
+								<d2l-icon class="flyout-divider hidden-small" icon="d2l-tier2:divider-big"></d2l-icon>
+							</template>
+							<div class="d2l-flyout-menu">
+								<slot name="d2l-flyout-menu" d2l-flyout-menu=""></slot>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -175,7 +201,7 @@ PolymerElement) {
 				type: String,
 				computed: '_getCurrentContentName(entity)'
 			},
-			isSidebarOpen: {
+			isSidebarClosed: {
 				type: Boolean,
 				value: true,
 				reflectToAttribute: true

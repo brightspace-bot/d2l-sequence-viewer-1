@@ -62,7 +62,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 					display: flex;
 					position: relative;
 					overflow: hidden;
-					max-width: var(--viewer-max-width);
+					/*max-width: var(--viewer-max-width);*/
 					width: 100%;
 					/*margin: 30px auto 0 auto;*/
 				}
@@ -74,7 +74,9 @@ class D2LSequenceViewer extends mixinBehaviors([
 					position: relative;
 					overflow: hidden;
 					background: white;
-					border-radius: 6px 6px 0 0;
+					/*border-radius: 6px 6px 0 0;*/
+					box-shadow: 2px 0 12px #00000029;
+					border-right: 1px solid #00000029;
 					-webkit-transition: max-width 0.4s ease-in-out;
 					-moz-transition: max-width 0.4s ease-in-out;
 					-o-transition: max-width 0.4s ease-in-out;
@@ -100,7 +102,12 @@ class D2LSequenceViewer extends mixinBehaviors([
 					transition: all 0.4s ease-in-out;
 					/*flex: 2;*/
 					box-sizing: border-box;
-					padding: 0 0 30px 30px;
+					/*padding: 0 0 30px 30px;*/
+
+					display: flex;
+					max-width: var(--viewer-max-width);
+					flex: 1;
+					margin: 0 auto;
 				}
 				.viewer {
 					position: relative;
@@ -193,7 +200,15 @@ class D2LSequenceViewer extends mixinBehaviors([
 		</div>
 		<frau-jwt-local token="{{token}}" scope="*:*:* content:files:read content:topics:read content:topics:mark-read"></frau-jwt-local>
 		<d2l-navigation-band></d2l-navigation-band>
-		<d2l-sequence-viewer-header class="topbar" href="{{href}}" token="[[token]]" role="banner" on-iterate="_onIterate" telemetry-client="[[telemetryClient]]" is-single-topic-view="[[_isSingleTopicView]]">
+		<d2l-sequence-viewer-header
+			class="topbar" href="{{href}}"
+			token="[[token]]"
+			role="banner"
+			on-iterate="_onIterate"
+			telemetry-client="[[telemetryClient]]"
+			is-single-topic-view="[[_isSingleTopicView]]"
+			is-sidebar-closed="[[isSidebarClosed]]"
+		>
 			<template is="dom-if" if="{{!_isSingleTopicView}}">
 				<span slot="d2l-flyout-menu" class="hello">
 					<d2l-navigation-button-notification-icon
@@ -231,7 +246,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 					redirect-cs=[[redirectCs]]
 					cs-redirect-path=[[csRedirectPath]]
 					no-redirect-query-param-string=[[noRedirectQueryParamString]]
-					>
+				>
 				</d2l-sequences-content-router>
 			</div>
 		</div>
@@ -314,6 +329,10 @@ class D2LSequenceViewer extends mixinBehaviors([
 			_sideNavIconName: {
 				type: String,
 				value: 'tier1:menu-hamburger'
+			},
+			isSidebarClosed: {
+				type: Boolean,
+				value: true
 			}
 		};
 	}
@@ -542,6 +561,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 		sidebarContainer.classList.remove('offscreen');
 		viewframeFogOfWar.classList.add('show');
 		this._sideNavIconName = 'tier1:close-default';
+		this.isSidebarClosed = false;
 
 		this.telemetryClient.logTelemetryEvent('sidebar-open');
 	}
@@ -559,6 +579,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 		}
 		sidebarContainer.classList.add('offscreen');
 		this._sideNavIconName = 'tier1:menu-hamburger';
+		this.isSidebarClosed = true;
 
 		this.telemetryClient.logTelemetryEvent('sidebar-close');
 	}
