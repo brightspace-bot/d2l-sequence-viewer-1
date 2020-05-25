@@ -35,6 +35,9 @@ PolymerElement) {
 
 				justify-content: space-between;
 			}
+			:host([is-sidebar-open]) #container {
+				/*background: red;*/
+			}
 			#left-content,
 			#right-content {
 				display: flex;
@@ -42,16 +45,25 @@ PolymerElement) {
 				justify-content: space-between;
 			}
 			#left-content {
-				padding-left: 30px;
-				/*TODO: this number will have to come from the size of the sidebar*/
-				width: calc(312px - 30px);
+				/*padding-left: 24px;*/
+				/*TODO: this number will have to come from the size of the sidebar, subtract the left padding*/
+				/*width: calc(312px - 24px);*/
+				width: 570px;
+				/*TODO: only show this on open*/
+				border-right: 1px solid #00000029;
+			}
+			#right-content {
+				padding-right: 24px;
+			}
+			#right-content .flyout-divider {
+				padding: 0 24px;
 			}
 			.back-to-module {
 				@apply --d2l-body-small-text;
 				/*overflow: hidden;*/
 				/*white-space: nowrap;*/
 				/*text-overflow: ellipsis;*/
-				/*padding-left: 8px;*/
+				padding-left: 24px;
 				margin-left: 0;
 			}
 			.flyout-menu {
@@ -59,10 +71,11 @@ PolymerElement) {
 				flex-direction: row;
 				align-items: center;
 				margin-left: auto;
+				/*padding-right: 24px;*/
 			}
 			.d2l-flyout-menu {
 				/*divider icon has inherent padding, otherwise it would be 30 horizontally*/
-				padding: 0 30px 0 15px;
+				padding: 0 24px 0 15px;
 			}
 			.topic-name {
 				@apply --d2l-body-compact-text;
@@ -161,6 +174,11 @@ PolymerElement) {
 			currentContentName: {
 				type: String,
 				computed: '_getCurrentContentName(entity)'
+			},
+			isSidebarOpen: {
+				type: Boolean,
+				value: true,
+				reflectToAttribute: true
 			}
 		};
 	}
