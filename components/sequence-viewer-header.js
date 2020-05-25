@@ -46,7 +46,9 @@ PolymerElement) {
 			}
 			#left-content {
 				display: flex;
-				flex: 1;
+				/*flex: 2;*/
+				flex-grow: 1;
+				flex-shrink: 2;
 			}
 			#left-inner,
 			#right-content {
@@ -112,6 +114,7 @@ PolymerElement) {
 				/*margin: 0 auto;*/
 				max-width: 1170px;
 				flex: 1;
+				display: none;
 			}
 			.iterator-icon {
 				/*width: 30px;*/
@@ -128,6 +131,11 @@ PolymerElement) {
 			@media(max-width: 929px) {
 				.hidden-small {
 					display: none;
+				}
+				#left-content {
+					position: absolute;
+					width: 65%
+					/*z-index: 3;*/
 				}
 			}
 			h1 {
@@ -153,9 +161,9 @@ PolymerElement) {
 					</div>
 				</div>
 
-				<div class="topic-name hidden-small">
-					<h1>[[currentContentName]]</h1>
-				</div>
+<!--				<div class="topic-name hidden-small">-->
+<!--					<h1>[[currentContentName]]</h1>-->
+<!--				</div>-->
 
 				<div id="right-content">
 					<template is="dom-if" if="[[!isSingleTopicView]]">
