@@ -2,10 +2,8 @@ import '@polymer/polymer/polymer-legacy.js';
 import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 import 'd2l-colors/d2l-colors.js';
 import 'd2l-typography/d2l-typography.js';
-import 'd2l-sequences/components/d2l-sequences-iterator.js';
 import 'd2l-sequences/d2l-sequence-launcher-unit/d2l-sequence-launcher-unit.js';
 import 'd2l-sequences/d2l-sequence-navigator/d2l-lesson-header.js';
-import 'd2l-sequences/d2l-sequence-navigator/d2l-sequence-end.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
@@ -18,7 +16,7 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 		<style>
 			#sidebar {
 				height: 100%;
-				width:100%;
+				width: 100%;
 				display: flex;
 				flex-direction: column;
 			}
@@ -37,9 +35,6 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				background-color: var(--d2l-asv-primary-color);
 				min-width: 250px;
 				padding: 8px 20px;
-			}
-			.m-module-heading-completion {
-				font-weight: normal;
 			}
 			.m-module-heading:hover {
 				background-color: var(--d2l-asv-header-hover-color);
