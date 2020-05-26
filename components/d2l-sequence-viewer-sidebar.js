@@ -45,22 +45,13 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				background-color: var(--d2l-asv-header-hover-color);
 			}
 			div.border {
-				box-sizing: border-box;
+				border-radius: 6px;
 				width: 100%;
 				height: 100%;
 			}
 			.m-module-heading:focus,
 			.m-module-heading:focus-within div.border {
-				border-style: solid;
-				border-width: 2px;
-				border-color: var(--d2l-asv-text-color);
-				border-radius: 6px;
-			}
-			.m-module-heading:focus,
-			.m-module-heading:focus-within d2l-lesson-header {
-				padding: 7px 8px;
-				width: calc(100% - 16px);
-				height: calc(100% - 14px);
+				box-shadow: 0 0 0 2px var(--d2l-asv-text-color);
 			}
 			:host([header-active]) .m-module-heading {
 				background-color: var(--d2l-asv-header-hover-color);
