@@ -223,8 +223,8 @@ class D2LSequenceViewer extends mixinBehaviors([
 				>
 				</d2l-sequence-viewer-sidebar>
 			</div>
-			<div id="viewframe-fog-of-war"></div>
-			<div id="viewframe" on-click="_closeSlidebarOnFocusContent" role="main" tabindex="0">
+			<div id="viewframe-fog-of-war" on-click="_closeSlidebarOnFocusContent"></div>
+			<div id="viewframe" role="main" tabindex="0">
 				<d2l-sequences-content-router
 					id="viewer"
 					class="viewer"
