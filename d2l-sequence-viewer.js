@@ -40,6 +40,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 				:host {
 					--viewer-max-width: 1170px;
 					--sidebar-max-width: 570px;
+					--topbar-height: 60px;
 
 					color: var(--d2l-color-ferrite);
 					@apply --d2l-body-standard-text;
@@ -50,32 +51,25 @@ class D2LSequenceViewer extends mixinBehaviors([
 					height: var(--dynamic-viewframe-height);
 				}
 				.topbar {
-					/*top: 4px;*/
-					/*width: 100%;*/
-					/*height: 30px;*/
 					z-index: 3;
 					box-shadow: 2px 0 3px 2px rgba(214,220,229,0.5); /* 50% D6DCE5 */
 					flex-flow: row;
 				}
 				#view-container {
-					flex: 1 1 0;
+					flex: 1;
 					display: flex;
 					position: relative;
 					overflow: hidden;
-					/*max-width: var(--viewer-max-width);*/
 					width: 100%;
-					/*margin: 30px auto 0 auto;*/
 				}
 				#sidebar-container {
 					height: 100%;
 					z-index: 2;
-					flex-grow: 1;
-					flex-shrink: 2;
+					flex: 1;
 					max-width: var(--sidebar-max-width);
 					position: relative;
 					overflow: hidden;
 					background: white;
-					/*border-radius: 6px 6px 0 0;*/
 					box-shadow: 2px 0 12px #00000029;
 					border-right: 1px solid #00000029;
 					-webkit-transition: max-width 0.4s ease-in-out;
@@ -96,17 +90,10 @@ class D2LSequenceViewer extends mixinBehaviors([
 					and fixing that offset here will prevent a double scrollbar */
 					height: calc(100% + 12px);
 
-					-webkit-transition: all 0.4s ease-in-out;
-					-webkit-overflow-scrolling: auto;
-					-moz-transition: all 0.4s ease-in-out;
-					-o-transition: all 0.4s ease-in-out;
-					transition: all 0.4s ease-in-out;
-					/*flex: 2;*/
 					box-sizing: border-box;
-
-					display: flex;
 					max-width: var(--viewer-max-width);
-					flex: 1;
+					display: flex;
+					flex: 2;
 					margin: 0 auto;
 					padding: 18px 0;
 				}
@@ -116,6 +103,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 					width: 100%;
 					height: 100%;
 					overflow-y: auto;
+					padding: 0 30px;
 				}
 				#viewframe:focus {
 					outline: none;
@@ -126,14 +114,10 @@ class D2LSequenceViewer extends mixinBehaviors([
 				.flyout-icon {
 					font-size: 0;
 					display: block;
-					height: 60px;
+					height: var(--topbar-height);
 				}
 				.d2l-sequence-viewer-navicon-container {
-					/*TODO: put this 60px height in a var*/
-					height: 60px;
-				}
-				.hello {
-					height: 60px;
+					height: var(--topbar-height);
 				}
 				#loadingscreen {
 					position: absolute;
@@ -163,8 +147,8 @@ class D2LSequenceViewer extends mixinBehaviors([
 					#view-container {
 						margin: 0;
 					}
-					#viewframe {
-						padding: 18px 24px;
+					.viewer {
+						padding: 0 24px;
 					}
 					#viewframe-fog-of-war.show {
 						position: absolute;
@@ -211,7 +195,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 			is-sidebar-closed="[[isSidebarClosed]]"
 		>
 			<template is="dom-if" if="{{!_isSingleTopicView}}">
-				<span slot="d2l-flyout-menu" class="hello">
+				<span slot="d2l-flyout-menu">
 					<d2l-navigation-button-notification-icon
 						icon="[[_sideNavIconName]]"
 						class="flyout-icon"

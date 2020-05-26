@@ -2,14 +2,12 @@ import '@polymer/polymer/polymer-legacy.js';
 import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 import 'd2l-colors/d2l-colors.js';
 import 'd2l-icons/d2l-icons.js';
-import 'd2l-icons/tier2-icons.js';
-import 'd2l-icons/tier3-icons.js';
 import 'd2l-typography/d2l-typography.js';
-import './d2l-sequence-viewer-iterator.js';
 import { IronA11yAnnouncer } from '@polymer/iron-a11y-announcer/iron-a11y-announcer.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+import './d2l-sequence-viewer-iterator.js';
 import '../localize-behavior.js';
 import TelemetryHelper from '../helpers/telemetry-helper';
 
@@ -28,65 +26,46 @@ PolymerElement) {
 	static get template() {
 		return html`
 		<style>
-			:host([is-sidebar-closed]) #left-inner {
-				max-width: 290px;
+			:host([is-sidebar-closed]) #header-left-inner {
+				max-width: 240px;
 				border-right: none;
 				box-shadow: none;
 			}
-
 			#container {
 				display: flex;
 				align-items: center;
-				background-color: white;
-
-				justify-content: space-between;
 			}
-			:host([is-sidebar-open]) #container {
-				/*background: red;*/
-			}
-			#left-content {
+			#header-left {
 				display: flex;
-				/*flex: 2;*/
-				flex-grow: 1;
-				flex-shrink: 2;
-			}
-			#left-inner,
-			#right-content {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-			}
-			#left-inner {
-				/*padding-left: 24px;*/
-				/*TODO: this number will have to come from the size of the sidebar, subtract the left padding*/
-				/*width: calc(312px - 24px);*/
-				/*width: 570px;*/
-				max-width: 570px;
-				/*TODO: only show this on open*/
-				border-right: 1px solid #00000029;
 				flex: 1;
-
+				z-index: 2;
+				background: white;
+			}
+			#header-left-inner {
+				display: flex;
+				flex: 1;
+				max-width: 570px;
+				border-right: 1px solid #00000029;
 				box-shadow: 2px 0 12px #00000029;
 				-webkit-transition: max-width 0.4s ease-in-out;
 				-moz-transition: max-width 0.4s ease-in-out;
 				-o-transition: max-width 0.4s ease-in-out;
 				transition: max-width 0.4s ease-in-out;
 			}
-			#right-content {
+			#header-right {
+				display: flex;
 				flex: 1;
 				justify-content: flex-end;
+				align-items: center;
 			}
-			#right-content .flyout-divider {
+			#header-right .flyout-divider {
 				padding: 0 24px;
 			}
-			#right-content d2l-sequence-viewer-iterator.next-button {
+			#header-right d2l-sequence-viewer-iterator.next-button {
 				padding-right: 24px;
 			}
 			.back-to-module {
 				@apply --d2l-body-small-text;
-				/*overflow: hidden;*/
-				/*white-space: nowrap;*/
-				/*text-overflow: ellipsis;*/
 				padding-left: 24px;
 				margin-left: 0;
 			}
@@ -95,10 +74,8 @@ PolymerElement) {
 				flex-direction: row;
 				align-items: center;
 				margin-left: auto;
-				/*padding-right: 24px;*/
 			}
 			.d2l-flyout-menu {
-				/*divider icon has inherent padding, otherwise it would be 30 horizontally*/
 				padding: 0 24px 0 15px;
 			}
 			.topic-name {
@@ -107,35 +84,18 @@ PolymerElement) {
 				overflow: hidden;
 				white-space: nowrap;
 				text-overflow: ellipsis;
-
-				/*position: absolute;*/
-				/*left: 0;*/
-				/*right: 0;*/
-				/*margin: 0 auto;*/
-				max-width: 1170px;
 				flex: 1;
-				display: none;
-			}
-			.iterator-icon {
-				/*width: 30px;*/
-				/*font-size: 0;*/
-				/*display: block;*/
 			}
 			.flyout-divider {
 				color: var(--d2l-color-corundum);
-				/*height: 23px;*/
-				/*width: 23px;*/
-				/*font-size: 0;*/
-				/*display: block;*/
 			}
 			@media(max-width: 929px) {
 				.hidden-small {
 					display: none;
 				}
-				#left-content {
+				#header-left {
 					position: absolute;
 					width: 65%
-					/*z-index: 3;*/
 				}
 			}
 			h1 {
@@ -143,16 +103,14 @@ PolymerElement) {
 			}
 		</style>
 			<div id="container">
-
-				<div id="left-content">
-					<div id="left-inner">
+				<div id="header-left">
+					<div id="header-left-inner">
 						<div class="back-to-module">
 							<slot name="d2l-back-to-module"></slot>
 						</div>
-
 						<div class="flyout-menu">
 							<template is="dom-if" if="[[!isSingleTopicView]]">
-								<d2l-icon class="flyout-divider hidden-small" icon="d2l-tier2:divider-big"></d2l-icon>
+								<d2l-icon class="flyout-divider" icon="d2l-tier2:divider-big"></d2l-icon>
 							</template>
 							<div class="d2l-flyout-menu">
 								<slot name="d2l-flyout-menu" d2l-flyout-menu=""></slot>
@@ -160,19 +118,16 @@ PolymerElement) {
 						</div>
 					</div>
 				</div>
-
-<!--				<div class="topic-name hidden-small">-->
-<!--					<h1>[[currentContentName]]</h1>-->
-<!--				</div>-->
-
-				<div id="right-content">
+				<div class="topic-name hidden-small">
+					<h1>[[currentContentName]]</h1>
+				</div>
+				<div id="header-right">
 					<template is="dom-if" if="[[!isSingleTopicView]]">
 						<d2l-sequence-viewer-iterator class="iterator-icon prev-button" current-activity="{{href}}" href="[[previousActivityHref]]" token="[[token]]" icon="d2l-tier3:chevron-left-circle" previous="" on-click="_onPreviousPress"></d2l-sequence-viewer-iterator>
 						<d2l-icon class="flyout-divider" icon="d2l-tier2:divider-big"></d2l-icon>
 						<d2l-sequence-viewer-iterator class="iterator-icon next-button" current-activity="{{href}}" href="[[nextActivityHref]]" token="[[token]]" icon="d2l-tier3:chevron-right-circle" next="" on-click="_onNextPress"></d2l-sequence-viewer-iterator>
 					</template>
 				</div>
-
 			</div>
 		`;
 	}
