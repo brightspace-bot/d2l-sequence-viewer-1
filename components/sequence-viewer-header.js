@@ -34,7 +34,6 @@ PolymerElement) {
 				display: flex;
 				flex: 1;
 				z-index: 2;
-				background: white;
 			}
 			:host([is-sidebar-closed]) #header-left-inner {
 				max-width: 240px;

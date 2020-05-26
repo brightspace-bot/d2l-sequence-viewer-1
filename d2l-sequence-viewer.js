@@ -52,8 +52,9 @@ class D2LSequenceViewer extends mixinBehaviors([
 				}
 				.topbar {
 					z-index: 3;
-					box-shadow: 2px 0 3px 2px rgba(214,220,229,0.5); /* 50% D6DCE5 */
+					box-shadow: 2px 0 12px #00000029;
 					flex-flow: row;
+					border-bottom: 1px solid #00000029;
 				}
 				#view-container {
 					flex: 1;
@@ -71,7 +72,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 					overflow: hidden;
 					background: white;
 					box-shadow: 2px 0 12px #00000029;
-					border-right: 1px solid #00000029;
 					-webkit-transition: max-width 0.4s ease-in-out;
 					-moz-transition: max-width 0.4s ease-in-out;
 					-o-transition: max-width 0.4s ease-in-out;
@@ -212,7 +212,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 			</div>
 		</d2l-sequence-viewer-header>
 		<div id="view-container">
-			<div id="viewframe-fog-of-war"></div>
 			<div id="sidebar-container" class="offscreen">
 				<d2l-sequence-viewer-sidebar
 					href="{{href}}"
@@ -221,6 +220,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 				>
 				</d2l-sequence-viewer-sidebar>
 			</div>
+			<div id="viewframe-fog-of-war"></div>
 			<div id="viewframe" on-click="_closeSlidebarOnFocusContent" role="main" tabindex="0">
 				<d2l-sequences-content-router
 					id="viewer"
