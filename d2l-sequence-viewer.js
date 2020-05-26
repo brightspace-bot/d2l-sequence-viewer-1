@@ -212,6 +212,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 			</div>
 		</d2l-sequence-viewer-header>
 		<div id="view-container">
+			<div id="viewframe-fog-of-war"></div>
 			<div id="sidebar-container" class="offscreen">
 				<d2l-sequence-viewer-sidebar
 					href="{{href}}"
@@ -221,7 +222,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 				</d2l-sequence-viewer-sidebar>
 			</div>
 			<div id="viewframe" on-click="_closeSlidebarOnFocusContent" role="main" tabindex="0">
-				<div id="viewframe-fog-of-war"></div>
 				<d2l-sequences-content-router
 					id="viewer"
 					class="viewer"
@@ -555,13 +555,12 @@ class D2LSequenceViewer extends mixinBehaviors([
 		const sidebarContainer = this.shadowRoot.getElementById('sidebar-container');
 		const viewframeFogOfWar = this.shadowRoot.getElementById('viewframe-fog-of-war');
 
-		viewframeFogOfWar.classList.remove('show');
-
 		// TODO: This a temp fix because this gets called EVERY click on the document,
 		// regardless of state. Find a better solution to handle this.
 		if (sidebarContainer.classList.contains('offscreen')) {
 			return;
 		}
+		viewframeFogOfWar.classList.remove('show');
 		sidebarContainer.classList.add('offscreen');
 		this._sideNavIconName = 'tier1:menu-hamburger';
 		this.isSidebarClosed = true;

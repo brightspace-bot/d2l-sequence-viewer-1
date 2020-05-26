@@ -26,11 +26,6 @@ PolymerElement) {
 	static get template() {
 		return html`
 		<style>
-			:host([is-sidebar-closed]) #header-left-inner {
-				max-width: 240px;
-				border-right: none;
-				box-shadow: none;
-			}
 			#container {
 				display: flex;
 				align-items: center;
@@ -40,6 +35,11 @@ PolymerElement) {
 				flex: 1;
 				z-index: 2;
 				background: white;
+			}
+			:host([is-sidebar-closed]) #header-left-inner {
+				max-width: 240px;
+				border-right: none;
+				box-shadow: none;
 			}
 			#header-left-inner {
 				display: flex;
