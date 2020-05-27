@@ -95,6 +95,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 					max-width: calc(var(--viewer-max-width) + 2*var(--viewframe-horizontal-margin));
 
 					box-sizing: border-box;
+					overflow: auto;
 					display: flex;
 					flex: 2;
 					margin: 0 auto;
