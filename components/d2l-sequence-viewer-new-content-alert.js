@@ -28,7 +28,7 @@ class D2LSequenceViewerNewContentAlert extends mixinBehaviors([
 						width: calc(100% - 36px);
 						max-width: 400px;
 						position: absolute;
-						z-index: 1;
+						z-index: 3;
 						left: 50%;
 						transform: translateX(-50%);
 						bottom: 15%;

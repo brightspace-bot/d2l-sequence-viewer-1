@@ -66,7 +66,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 				}
 				#sidebar-container {
 					height: 100%;
-					z-index: 1;
+					z-index: 2;
 					flex: 1;
 					max-width: var(--sidebar-max-width);
 					position: relative;
