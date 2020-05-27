@@ -2,11 +2,8 @@ import '@polymer/polymer/polymer-legacy.js';
 import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 import 'd2l-colors/d2l-colors.js';
 import 'd2l-typography/d2l-typography.js';
-import 'd2l-sequences/components/d2l-sequences-iterator.js';
 import 'd2l-sequences/d2l-sequence-launcher-unit/d2l-sequence-launcher-unit.js';
 import 'd2l-sequences/d2l-sequence-navigator/d2l-lesson-header.js';
-import 'd2l-sequences/d2l-sequence-navigator/d2l-sequence-end.js';
-import 'd2l-sequences/d2l-sequence-navigator/d2l-module-completion-count.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
@@ -19,6 +16,7 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 		<style>
 			#sidebar {
 				height: 100%;
+				width: 100%;
 				display: flex;
 				flex-direction: column;
 			}
@@ -31,34 +29,38 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				min-width: 250px;
 			}
 			.m-module-heading {
-				border-top-left-radius: 6px;
-				border-top-right-radius: 6px;
 				display: flex;
-				justify-content: space-between;
+				justify-content: center;
+				align-items: center;
 				background-color: var(--d2l-asv-primary-color);
-				color: var(--d2l-asv-text-color);
 				min-width: 250px;
-				padding: 13px 24px;
-				font-size: 16px;
+				padding: 8px 20px;
 			}
-			.m-module-heading-completion {
-				font-weight: normal;
+			.m-module-heading:hover {
+				background-color: var(--d2l-asv-header-hover-color);
+			}
+			div.border {
+				border-radius: 6px;
+				width: 100%;
+				height: 100%;
+			}
+			.m-module-heading:focus,
+			.m-module-heading:focus-within div.border {
+				box-shadow: 0 0 0 2px var(--d2l-asv-text-color);
+			}
+			:host([header-active]) .m-module-heading {
+				background-color: var(--d2l-asv-header-hover-color);
 			}
 		</style>
 		<div id="sidebar">
 			<div class="m-module-heading">
-				<d2l-sequences-module-name
-					href="[[rootHref]]"
-					token="[[token]]"
-					class="m-module-heading-title"
-				>
-				</d2l-sequences-module-name>
-				<d2l-module-completion-count
-					href="[[rootHref]]"
-					token="[[token]]"
-					class="m-module-heading-completion"
-				>
-				</d2l-module-completion-count>
+				<div class="border">
+					<d2l-lesson-header id="sidebarHeader"
+						href="[[rootHref]]"
+						current-activity="{{href}}"
+						token="[[token]]">
+					</d2l-lesson-header>
+				</div>
 			</div>
 			<div id="content">
 				<d2l-sequence-launcher-unit
@@ -78,6 +80,10 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 	_getRootHref(entity) {
 		const rootLink = entity && entity.getLinkByRel('https://sequences.api.brightspace.com/rels/sequence-root');
 		return rootLink && rootLink.href || '';
+	}
+
+	_isHeaderActive(href, rootHref) {
+		return rootHref === href;
 	}
 
 	static get is() {
@@ -103,6 +109,11 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 			rootHref: {
 				type: String,
 				computed: '_getRootHref(entity)'
+			},
+			headerActive: {
+				type: Boolean,
+				computed: '_isHeaderActive(href, rootHref)',
+				reflectToAttribute: true
 			}
 		};
 	}

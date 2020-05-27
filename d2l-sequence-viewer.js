@@ -74,7 +74,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 					position: relative;
 					overflow: hidden;
 					background: white;
-					border-radius: 6px 6px 0 0;
 					-webkit-transition: max-width 0.4s ease-in-out;
 					-moz-transition: max-width 0.4s ease-in-out;
 					-o-transition: max-width 0.4s ease-in-out;
