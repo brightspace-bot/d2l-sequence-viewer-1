@@ -36,7 +36,7 @@ PolymerElement) {
 				z-index: 2;
 			}
 			:host([is-sidebar-closed]) #header-left-inner {
-				max-width: 240px;
+				max-width: 260px;
 				border-right: none;
 				box-shadow: none;
 			}
@@ -97,6 +97,11 @@ PolymerElement) {
 					position: absolute;
 					min-width: var(--sidebar-min-width);
 					width: var(--sidebar-absolute-width);
+				}
+			}
+			@media(max-width: 420px) {
+				:host([is-sidebar-closed]) #header-left-inner {
+					max-width: 130px;
 				}
 			}
 			h1 {

@@ -40,7 +40,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 				:host {
 					--viewer-max-width: 1170px;
 					--sidebar-max-width: 570px;
-					--sidebar-absolute-width: 65%;
+					--sidebar-absolute-width: 80%;
 					--sidebar-min-width: 280px;
 					--topbar-height: 60px;
 					--viewframe-horizontal-margin: 30px;
@@ -216,7 +216,11 @@ class D2LSequenceViewer extends mixinBehaviors([
 				</span>
 			</template>
 			<div slot="d2l-back-to-module" class="d2l-sequence-viewer-navicon-container">
-				<d2l-navigation-link-back text="[[localize('backToContent')]]" on-click="_onClickBack" href="[[backToContentLink]]">
+				<d2l-navigation-link-back
+					text="[[_navBackText]]"
+					on-click="_onClickBack"
+					href="[[backToContentLink]]"
+				>
 				</d2l-navigation-link-back>
 			</div>
 		</d2l-sequence-viewer-header>
@@ -327,6 +331,10 @@ class D2LSequenceViewer extends mixinBehaviors([
 			isSidebarClosed: {
 				type: Boolean,
 				value: true
+			},
+			_navBackText: {
+				type: String,
+				value: ''
 			}
 		};
 	}
@@ -344,6 +352,8 @@ class D2LSequenceViewer extends mixinBehaviors([
 			this.dataAsvCssVars && JSON.parse(this.dataAsvCssVars) ||
 			JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-asv-css-vars'));
 		const navBarStyles = JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-css-vars'));
+
+		this._setBackButtonText();
 
 		const customStyles = {
 			'--dynamic-viewframe-height': `${window.innerHeight}px`
@@ -585,9 +595,19 @@ class D2LSequenceViewer extends mixinBehaviors([
 			this._sideBarOpen();
 		}
 
+		this._setBackButtonText();
+
 		this.updateStyles({
 			'--dynamic-viewframe-height': `${window.innerHeight}px`
 		});
+	}
+
+	_setBackButtonText() {
+		if (window.innerWidth > 420) {
+			this._navBackText = this.localize('backToContent');
+		} else {
+			this._navBackText = '';
+		}
 	}
 }
 customElements.define(D2LSequenceViewer.is, D2LSequenceViewer);
