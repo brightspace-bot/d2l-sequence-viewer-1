@@ -43,6 +43,7 @@ PolymerElement) {
 			#header-left-inner {
 				display: flex;
 				flex: 1;
+				background: white;
 				max-width: 570px;
 				border-right: 1px solid #00000029;
 				box-shadow: 2px 0 12px #00000029;
@@ -94,7 +95,8 @@ PolymerElement) {
 				}
 				#header-left {
 					position: absolute;
-					width: 65%
+					min-width: var(--sidebar-min-width);
+					width: var(--sidebar-absolute-width);
 				}
 			}
 			h1 {

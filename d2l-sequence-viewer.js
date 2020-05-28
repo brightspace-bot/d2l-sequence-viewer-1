@@ -40,6 +40,8 @@ class D2LSequenceViewer extends mixinBehaviors([
 				:host {
 					--viewer-max-width: 1170px;
 					--sidebar-max-width: 570px;
+					--sidebar-absolute-width: 65%;
+					--sidebar-min-width: 280px;
 					--topbar-height: 60px;
 					--viewframe-horizontal-margin: 30px;
 
@@ -72,6 +74,9 @@ class D2LSequenceViewer extends mixinBehaviors([
 					position: relative;
 					overflow: hidden;
 					background: white;
+					border: 1px solid var(--d2l-color-mica);
+					border-top: none;
+					box-sizing: border-box;
 					box-shadow: 2px 0 12px #00000029;
 					-webkit-transition: max-width 0.4s ease-in-out;
 					-moz-transition: max-width 0.4s ease-in-out;
@@ -163,8 +168,8 @@ class D2LSequenceViewer extends mixinBehaviors([
 					}
 					#sidebar-container {
 						position: absolute;
-						width: 65%;
-						max-width: var(--sidebar-max-width);
+						width: var(--sidebar-absolute-width);
+						min-width: var(--sidebar-min-width);
 						flex: unset;
 						height: 100%;
 						left: 0;
