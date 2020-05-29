@@ -23,9 +23,6 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 			#content {
 				flex: 1;
 				overflow-y: auto;
-				border: 1px solid var(--d2l-color-mica);
-				border-top: none;
-				border-bottom: none;
 				min-width: 250px;
 			}
 			.m-module-heading {
