@@ -271,10 +271,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 				type: String,
 				computed: '_getRootHref(entity)'
 			},
-			_sequenceEndHref: {
-				type: String,
-				computed: '_getSequenceEndHref(entity)'
-			},
 			title: {
 				type: Object,
 				computed: '_getTitle(entity)',
@@ -519,11 +515,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 	_getRootHref(entity) {
 		const rootLink = entity && entity.getLinkByRel('https://sequences.api.brightspace.com/rels/sequence-root');
 		return rootLink && rootLink.href || '';
-	}
-
-	_getSequenceEndHref(entity) {
-		const endOfSequenceLink = entity && entity.getLinkByRel('https://sequences.api.brightspace.com/rels/end-of-sequence');
-		return endOfSequenceLink && endOfSequenceLink.href || '';
 	}
 
 	_setLastViewedContentObject(entity) {
