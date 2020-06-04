@@ -76,7 +76,7 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 						token="[[token]]"
 						current-activity="{{href}}"
 						text="[[localize('endOfSequence')]]"
-						slot="end-of-lesson"
+						slot="end-of-unit"
 					/>
 				</d2l-sequence-launcher-unit>
 			</div>
