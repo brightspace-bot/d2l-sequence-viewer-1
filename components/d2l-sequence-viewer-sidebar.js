@@ -78,7 +78,6 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 						text="[[localize('endOfSequence')]]"
 						slot="end-of-lesson"
 					/>
-				</d2l-sequence-end>
 				</d2l-sequence-launcher-unit>
 			</div>
 		</div>
