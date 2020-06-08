@@ -4,12 +4,15 @@ import 'd2l-colors/d2l-colors.js';
 import 'd2l-typography/d2l-typography.js';
 import 'd2l-sequences/d2l-sequence-launcher-unit/d2l-sequence-launcher-unit.js';
 import 'd2l-sequences/d2l-sequence-navigator/d2l-lesson-header.js';
+import 'd2l-sequences/d2l-sequence-navigator/d2l-sequence-end.js';
+import '../localize-behavior.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 
 class D2LSequenceViewerSidebar extends mixinBehaviors([
 	D2L.PolymerBehaviors.Siren.EntityBehavior,
+	D2L.PolymerBehaviors.SequenceViewer.LocalizeBehavior
 ], PolymerElement) {
 	static get template() {
 		return html`
@@ -68,6 +71,13 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 					show-loading-skeleton="[[showLoadingSkeleton]]"
 					is-sidebar
 				>
+					<d2l-sequence-end
+						href="[[_sequenceEndHref]]"
+						token="[[token]]"
+						current-activity="{{href}}"
+						text="[[localize('endOfSequence')]]"
+						slot="end-of-unit"
+					/>
 				</d2l-sequence-launcher-unit>
 			</div>
 		</div>
@@ -81,6 +91,11 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 
 	_isHeaderActive(href, rootHref) {
 		return rootHref === href;
+	}
+
+	_getSequenceEndHref(entity) {
+		const endOfSequenceLink = entity && entity.getLinkByRel('https://sequences.api.brightspace.com/rels/end-of-sequence');
+		return endOfSequenceLink && endOfSequenceLink.href || '';
 	}
 
 	static get is() {
@@ -111,6 +126,10 @@ class D2LSequenceViewerSidebar extends mixinBehaviors([
 				type: Boolean,
 				computed: '_isHeaderActive(href, rootHref)',
 				reflectToAttribute: true
+			},
+			_sequenceEndHref: {
+				type: String,
+				computed: '_getSequenceEndHref(entity)'
 			}
 		};
 	}
