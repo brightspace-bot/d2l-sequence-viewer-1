@@ -33,7 +33,6 @@ PolymerElement) {
 			#header-left {
 				display: flex;
 				flex: 1;
-				z-index: 2;
 			}
 			:host([is-sidebar-closed]) #header-left-inner {
 				max-width: 260px;
@@ -43,6 +42,7 @@ PolymerElement) {
 			#header-left-inner {
 				display: flex;
 				flex: 1;
+				z-index: 2;
 				background: white;
 				max-width: 570px;
 				border-right: 1px solid #00000029;
@@ -99,7 +99,7 @@ PolymerElement) {
 					width: var(--sidebar-absolute-width);
 				}
 			}
-			@media(max-width: 420px) {
+			@media(max-width: 435px) {
 				:host([is-sidebar-closed]) #header-left-inner {
 					max-width: 130px;
 				}
