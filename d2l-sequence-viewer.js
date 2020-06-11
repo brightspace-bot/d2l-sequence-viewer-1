@@ -594,7 +594,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 	}
 
 	_setBackButtonText() {
-		if (window.innerWidth > 420) {
+		if (window.innerWidth > 435) {
 			this._navBackText = this.localize('backToContent');
 		} else {
 			this._navBackText = '';
