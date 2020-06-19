@@ -14,6 +14,7 @@ import 'd2l-navigation/d2l-navigation-link-back.js';
 import 'polymer-frau-jwt/frau-jwt-local.js';
 import 'd2l-polymer-siren-behaviors/store/siren-action-behavior.js';
 import '@brightspace-ui/core/components/loading-spinner/loading-spinner.js';
+import '@brightspace-ui/core/components/button/button-subtle.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
@@ -105,14 +106,18 @@ class D2LSequenceViewer extends mixinBehaviors([
 					flex: 2;
 					margin: 0 auto;
 					padding: 18px 0;
+					flex-direction: column;
+				}
+				d2l-button-subtle {
+					margin: 0 0 12px var(--viewframe-horizontal-margin);
+					width: min-content;
 				}
 				.viewer {
 					position: relative;
 					display: inline-block;
-					width: 100%;
 					height: 100%;
 					overflow-y: auto;
-					padding: 0 var(--viewframe-horizontal-margin);
+					margin: 0 var(--viewframe-horizontal-margin);
 				}
 				#viewframe:focus {
 					outline: none;
@@ -156,8 +161,11 @@ class D2LSequenceViewer extends mixinBehaviors([
 					#view-container {
 						margin: 0;
 					}
+					d2l-button-subtle {
+						margin: 0 0 12px 24px;
+					}
 					.viewer {
-						padding: 0 24px;
+						margin: 0 24px;
 					}
 					#viewframe-fog-of-war.show {
 						position: absolute;
@@ -235,17 +243,34 @@ class D2LSequenceViewer extends mixinBehaviors([
 			</div>
 			<div id="viewframe-fog-of-war" on-click="_closeSlidebarOnFocusContent"></div>
 			<div id="viewframe" role="main" tabindex="0">
-				<d2l-sequences-content-router
-					id="viewer"
-					class="viewer"
-					on-sequences-return-mixin-click-back="_onClickBack"
-					href="{{href}}"
-					token="[[token]]"
-					redirect-cs=[[redirectCs]]
-					cs-redirect-path=[[csRedirectPath]]
-					no-redirect-query-param-string=[[noRedirectQueryParamString]]
-				>
-				</d2l-sequences-content-router>
+				<template is="dom-if" if="[[_docReaderHref]]">
+					<d2l-button-subtle
+						text=[[localize('docReader')]]
+						aria-label$="[[localize('docReader')]]"
+						icon="tier1:file-audio"
+						on-click="_toggleDocReaderView"
+					>
+					</d2l-button-subtle>
+				</template>
+				<template is="dom-if" if="[[!_showDocReaderContent]]">
+					<d2l-sequences-content-router
+						class="viewer"
+						on-sequences-return-mixin-click-back="_onClickBack"
+						href="{{href}}"
+						token="[[token]]"
+						redirect-cs=[[redirectCs]]
+						cs-redirect-path=[[csRedirectPath]]
+						no-redirect-query-param-string=[[noRedirectQueryParamString]]
+					>
+					</d2l-sequences-content-router>
+				</template>
+				<template is="dom-if" if="[[_showDocReaderContent]]">
+					<iframe
+						class="viewer"
+						src="[[_docReaderHref]]"
+					>
+					</iframe>
+				</template>
 			</div>
 		</div>
 		<d2l-sequence-viewer-new-content-alert
@@ -331,6 +356,15 @@ class D2LSequenceViewer extends mixinBehaviors([
 			_navBackText: {
 				type: String,
 				value: ''
+			},
+			_docReaderHref: {
+				type: String,
+				value: null,
+				computed: '_getDocReaderHref(entity)'
+			},
+			_showDocReaderContent: {
+				type: Boolean,
+				value: false
 			}
 		};
 	}
@@ -377,6 +411,8 @@ class D2LSequenceViewer extends mixinBehaviors([
 	}
 
 	async _onEntityChanged(entity) {
+		this._showDocReaderContent = false;
+
 		//entity is null or not first time loading the page
 		if (!entity || this._loaded) {
 			return;
@@ -450,8 +486,20 @@ class D2LSequenceViewer extends mixinBehaviors([
 		return !(entity) || entity.hasClass('single-topic-sequence') || false;
 	}
 
+	_getDocReaderHref(entity) {
+		const fileActivityEntity = entity && entity.getSubEntityByClass('file-activity');
+		const fileEntity = fileActivityEntity && fileActivityEntity.getSubEntityByClass('file');
+		const docReaderLink = fileEntity && fileEntity.getLinkByClass('docreader') || {};
+
+		return docReaderLink.href;
+	}
+
 	_getTelemetryClient(telemetryEndpoint) {
 		return new TelemetryHelper(telemetryEndpoint);
+	}
+
+	_toggleDocReaderView() {
+		this._showDocReaderContent = !this._showDocReaderContent;
 	}
 
 	_closeSlidebarOnFocusContent() {
