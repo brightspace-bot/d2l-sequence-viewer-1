@@ -42,7 +42,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 			<style is="custom-style" include="d2l-typography">
 				:host {
 					--viewer-max-width: 1170px;
-
+					--viewframe-horizontal-margin: 30px;
 					color: var(--d2l-color-ferrite);
 					@apply --d2l-body-standard-text;
 					position: relative;
