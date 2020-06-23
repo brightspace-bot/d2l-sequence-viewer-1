@@ -395,18 +395,6 @@ class D2LSequenceViewer extends mixinBehaviors([
 					return new TelemetryHelper();
 				}
 			},
-			_sideNavIconName: {
-				type: String,
-				value: 'tier1:menu-hamburger'
-			},
-			isSidebarClosed: {
-				type: Boolean,
-				value: true
-			},
-			_navBackText: {
-				type: String,
-				value: ''
-			},
 			_docReaderHref: {
 				type: String,
 				value: null,
