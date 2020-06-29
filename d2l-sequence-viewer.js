@@ -245,7 +245,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 			<div id="viewframe" role="main" tabindex="0">
 				<template is="dom-if" if="[[_docReaderHref]]">
 					<d2l-button-subtle
-						text=[[localize('docReader')]]
+						text=[[_docReaderText]]
 						aria-label$="[[localize('docReader')]]"
 						icon="tier1:file-audio"
 						on-click="_toggleDocReaderView"
@@ -365,6 +365,10 @@ class D2LSequenceViewer extends mixinBehaviors([
 			_showDocReaderContent: {
 				type: Boolean,
 				value: false
+			},
+			_docReaderText: {
+				type: String,
+				value: '',
 			}
 		};
 	}
@@ -373,7 +377,8 @@ class D2LSequenceViewer extends mixinBehaviors([
 			'_pushState(href)',
 			'_setLastViewedContentObject(entity)',
 			'_onEntityChanged(entity)',
-			'_onContentReady(entity)'
+			'_onContentReady(entity)',
+			'_onDocReaderToggle(_showDocReaderContent)'
 		];
 	}
 	ready() {
@@ -384,6 +389,7 @@ class D2LSequenceViewer extends mixinBehaviors([
 		const navBarStyles = JSON.parse(document.getElementsByTagName('html')[0].getAttribute('data-css-vars'));
 
 		this._setBackButtonText();
+		this._setDocReaderText();
 
 		const customStyles = {
 			'--dynamic-viewframe-height': `${window.innerHeight}px`
@@ -454,6 +460,10 @@ class D2LSequenceViewer extends mixinBehaviors([
 			PerformanceHelper.perfMeasure('api-call-finish', 'mark-api-call-start', 'mark-api-call-end');
 			this.telemetryClient.logPerformanceEvent('on-content-load', 'api-call-finish');
 		}
+	}
+
+	_onDocReaderToggle() {
+		this._setDocReaderText();
 	}
 
 	_titleChanged(title) {
@@ -646,6 +656,14 @@ class D2LSequenceViewer extends mixinBehaviors([
 			this._navBackText = this.localize('backToContent');
 		} else {
 			this._navBackText = '';
+		}
+	}
+
+	_setDocReaderText() {
+		if (this._showDocReaderContent) {
+			this._docReaderText = this.localize('closeDocReader');
+		} else {
+			this._docReaderText = this.localize('openDocReader');
 		}
 	}
 }
