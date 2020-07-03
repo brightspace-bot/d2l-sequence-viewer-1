@@ -211,18 +211,16 @@ class D2LSequenceViewer extends mixinBehaviors([
 			is-single-topic-view="[[_isSingleTopicView]]"
 			is-sidebar-closed="[[isSidebarClosed]]"
 		>
-			<template is="dom-if" if="{{!_isSingleTopicView}}">
-				<span slot="d2l-flyout-menu">
-					<d2l-navigation-button-notification-icon
-						icon="[[_sideNavIconName]]"
-						class="flyout-icon"
-						on-click="_toggleSlideSidebar"
-						aria-label$="[[localize('toggleNavMenu')]]"
-					>
-						[[localize('toggleNavMenu')]]
-					</d2l-navigation-button-notification-icon>
-				</span>
-			</template>
+			<span slot="d2l-flyout-menu">
+				<d2l-navigation-button-notification-icon
+					icon="[[_sideNavIconName]]"
+					class="flyout-icon"
+					on-click="_toggleSlideSidebar"
+					aria-label$="[[localize('toggleNavMenu')]]"
+				>
+					[[localize('toggleNavMenu')]]
+				</d2l-navigation-button-notification-icon>
+			</span>
 			<div slot="d2l-back-to-module" class="d2l-sequence-viewer-navicon-container">
 				<d2l-navigation-link-back
 					text="[[_navBackText]]"

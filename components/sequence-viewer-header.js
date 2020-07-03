@@ -29,6 +29,7 @@ PolymerElement) {
 			#container {
 				display: flex;
 				align-items: center;
+				height: var(--topbar-height);
 			}
 			#header-left {
 				display: flex;
@@ -114,14 +115,14 @@ PolymerElement) {
 						<div class="back-to-module">
 							<slot name="d2l-back-to-module"></slot>
 						</div>
-						<div class="flyout-menu">
-							<template is="dom-if" if="[[!isSingleTopicView]]">
+						<template is="dom-if" if="[[!isSingleTopicView]]">
+							<div class="flyout-menu">
 								<d2l-icon class="flyout-divider" icon="d2l-tier2:divider-big"></d2l-icon>
-								<div class="d2l-flyout-menu">
-									<slot name="d2l-flyout-menu" d2l-flyout-menu=""></slot>
-								</div>
-							</template>
-						</div>
+							</div>
+							<div class="d2l-flyout-menu">
+								<slot name="d2l-flyout-menu" d2l-flyout-menu=""></slot>
+							</div>
+						</template>
 					</div>
 				</div>
 				<div class="topic-name hidden-small">
