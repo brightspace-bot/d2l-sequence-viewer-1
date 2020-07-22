@@ -1,0 +1,12 @@
+{
+   "activity" : "Activity",
+   "backToContent" : "Back to Content",
+   "close" : "Close",
+   "closeDocReader" : "Close DocReader",
+   "contentLinkText" : "Click to visit new content",
+   "endOfSequence" : "End of Unit",
+   "goBack" : "Go Back",
+   "newContentAvailable" : "New content is now available!",
+   "openDocReader" : "Open DocReader",
+   "toggleNavMenu" : "Toggle navigational slide out sidebar"
+}
