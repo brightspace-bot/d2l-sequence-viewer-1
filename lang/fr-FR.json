@@ -2,11 +2,11 @@
    "activity" : "Activité",
    "backToContent" : "Retour à Contenu",
    "close" : "Fermer",
+   "closeDocReader" : "Close DocReader",
    "contentLinkText" : "Cliquer pour voir le nouveau contenu",
-   "openDocReader": "Ouvrir avec DocReader",
-   "closeDocReader": "Close DocReader",
    "endOfSequence" : "Fin de l'unité",
    "goBack" : "Retour",
    "newContentAvailable" : "Le nouveau contenu est maintenant disponible!",
+   "openDocReader" : "Ouvrir avec DocReader",
    "toggleNavMenu" : "Faire paraître la barre latérale de navigation"
 }
