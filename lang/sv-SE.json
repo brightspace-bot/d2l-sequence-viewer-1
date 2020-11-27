@@ -2,11 +2,11 @@
    "activity" : "Aktivitet",
    "backToContent" : "Tillbaka till innehåll",
    "close" : "Stäng",
+   "closeDocReader" : "Stäng docReader",
    "contentLinkText" : "Klicka för att gå till nytt innehåll",
-   "openDocReader": "Open DocReader",
-   "closeDocReader": "Close DocReader",
    "endOfSequence" : "Slutet av en period",
    "goBack" : "Gå tillbaka",
    "newContentAvailable" : "Nytt innehåll finns nu tillgängligt!",
+   "openDocReader" : "Öppna docReader",
    "toggleNavMenu" : "Växla utdragbart navigeringssidofält"
 }

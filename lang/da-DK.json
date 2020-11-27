@@ -2,11 +2,11 @@
    "activity" : "Aktivitet",
    "backToContent" : "Tilbage til indhold",
    "close" : "Luk",
+   "closeDocReader" : "Luk DocReader",
    "contentLinkText" : "Klik for at gå til nyt indhold",
-   "openDocReader": "Open DocReader",
-   "closeDocReader": "Close DocReader",
    "endOfSequence" : "Afslutning på enhed",
    "goBack" : "Gå tilbage",
    "newContentAvailable" : "Nyt indhold er nu tilgængeligt!",
+   "openDocReader" : "Åbn DocReader",
    "toggleNavMenu" : "Slå sidepanelet for navigation, som du finder i den ene side af skærmen, til og fra"
 }
