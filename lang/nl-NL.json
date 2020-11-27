@@ -2,11 +2,11 @@
    "activity" : "Activiteit",
    "backToContent" : "Terug naar inhoud",
    "close" : "Sluiten",
-   "contentLinkText" : "Klik om naar nieuwe content te gaan",
-   "openDocReader": "Open DocReader",
-   "closeDocReader": "Close DocReader",
+   "closeDocReader" : "DocReader sluiten",
+   "contentLinkText" : "Klik om naar nieuwe inhoud te gaan",
    "endOfSequence" : "Einde van eenheid",
    "goBack" : "Ga terug",
-   "newContentAvailable" : "Nieuwe content is nu beschikbaar!",
+   "newContentAvailable" : "Nieuwe inhoud is nu beschikbaar!",
+   "openDocReader" : "DocReader openen",
    "toggleNavMenu" : "Navigatiezijbalk in-/uitschakelen"
 }
