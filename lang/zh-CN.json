@@ -2,11 +2,11 @@
    "activity" : "活动",
    "backToContent" : "返回目录",
    "close" : "关闭",
+   "closeDocReader" : "关闭 DocReader",
    "contentLinkText" : "单击以访问新内容",
-   "openDocReader": "Open DocReader",
-   "closeDocReader": "Close DocReader",
    "endOfSequence" : "单元结束",
    "goBack" : "返回",
    "newContentAvailable" : "新内容现在可用！",
+   "openDocReader" : "打开 DocReader",
    "toggleNavMenu" : "切换导航滑动侧边栏"
 }
